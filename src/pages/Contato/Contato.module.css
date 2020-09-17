@@ -1,0 +1,19 @@
+.AppContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.OtherColors h1 {
+  color: #4d7994;
+}
+.OtherColors h2 {
+  color: #444444;
+}
+.OtherColors h3 {
+  color: #4d7994;
+}

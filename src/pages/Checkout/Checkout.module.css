@@ -1,0 +1,188 @@
+.colorsWebSite {
+  color: #8f2c31;
+  color: #0155a0; /* hover */
+  color: #4d7994; /* Section Title */
+  color: #444444;
+  color: #fb5f2e; /* DISCOUNT */
+  background-color: #31ae75;
+  color: #e8ba3c;
+  background-color: #145a83; /* Comprar Declaração Box */
+  background-color: #033959; /* FOOTER */
+  background-color: #f3f3f3; /* SectionGrey */
+  background-color: #535353; /* SectionGreyDark */
+  background-color: #145a83; /* SectionBlueDark */
+}
+.AppContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ContainerA {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.ContainerB {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.ContainerC {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #033959;
+  color: white;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+/* FORMA DE PAGAMENTO CONTAINER: */
+.ContainerD {
+  padding: 30px 25px;
+  width: 300px;
+  /* max-height: 300px; */
+  /* text-align: center; */
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  color: black;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.SectionTitle {
+  padding: 15px;
+  font-size: 2.8em;
+  color: #4d7994;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.titleSecond {
+  margin-top: 30px;
+  font-size: 0.5em;
+  display: block;
+  line-height: 1.2em;
+  font-weight: lighter;
+}
+.UsuarioDadosStyle h3 {
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+.UsuarioDadosStyle h2 {
+  text-align: left;
+}
+.LeftAlignment {
+  text-align: left;
+}
+.UsuarioDadosStyle p {
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 1.3em;
+}
+.AvisoParaLogar {
+  padding: 0 15px 0 15px;
+  color: #8f2c31;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+.GridCheckout {
+  display: grid;
+  grid-template-columns: 35% 35%; /* 3 columns */
+  box-sizing: border-box;
+  justify-content: center;
+  column-gap: 40px;
+  padding: 20px;
+}
+.GridCheckout > div {
+  text-align: center;
+}
+.GridCheckout h3 {
+  /* color: white; */
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.7);
+  text-align: left;
+}
+.GridCheckout h2 {
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.7);
+}
+.InlineBlock {
+  display: inline-block;
+}
+.ImgResumoCompra {
+  margin-right: 10px;
+  text-align: left;
+}
+.FontBlue {
+  color: #4d7994;
+  /* text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7); */
+}
+.BtnFinalizar {
+  text-align: center;
+}
+.MobileOnly {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .GridCheckout {
+    grid-template-columns: 45% 45%; /* 2 columns */
+  }
+}
+@media (max-width: 800px) {
+  .ContainerA,
+  .ContainerB,
+  .ContainerC {
+    width: 280px;
+  }
+}
+/* MOBILE */
+@media (max-width: 700px) {
+  .GridCheckout {
+    grid-template-columns: 95%;
+    text-align: center;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  .GridCheckout > div {
+    text-align: center;
+  }
+  .UsuarioDadosStyle h3 {
+    text-align: center;
+  }
+  .UsuarioDadosStyle p {
+    text-align: center;
+  }
+  .MobileOnly {
+    display: inline-block;
+  }
+  .UsuarioDadosStyle h2 {
+    text-align: center;
+  }
+  .LeftAlignment {
+    text-align: center;
+  }
+  .ContainerA,
+  .ContainerB,
+  .ContainerC {
+    width: 400px;
+  }
+  /* FORMA DE PAGAMENTO CONTAINER: */
+  .ContainerD {
+    padding: 30px 36px;
+    width: 400px;
+  }
+}
+/* MOBILE */
+@media (max-width: 600px) {
+  .ContainerA,
+  .ContainerB,
+  .ContainerC {
+    width: 100%;
+  }
+  /* FORMA DE PAGAMENTO CONTAINER: */
+  .ContainerD {
+    width: 100%;
+  }
+}

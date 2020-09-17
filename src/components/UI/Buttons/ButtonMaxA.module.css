@@ -1,0 +1,20 @@
+.ButtonMaxA {
+  color: #9b7c26;
+  padding: 8px 22px;
+  font-size: 1.4em;
+  border-radius: 10px;
+  /* background-color: #e8ba3c; */
+  box-sizing: border-box;
+  outline: 0;
+  border: 2px solid #9b7c26;
+  transition: 0.3s;
+}
+.ButtonMaxA:hover {
+  color: white;
+  background-color: #e8ba3c;
+  border: 2px solid #e8ba3c;
+  transform: translateY(-6%);
+  box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  -webkit-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+}

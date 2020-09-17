@@ -1,0 +1,48 @@
+.AppContainer {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+}
+.SectionGrey {
+  background-color: #f3f3f3;
+}
+.SectionGreyDark {
+  background-color: #535353;
+}
+.Flexbox {
+  display: flex;
+  /* align-items: top; */
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.Flexbox div {
+  flex: 1 1 400px; /* 320px min, than wrap! */
+  padding: 5px 20px;
+  box-sizing: border-box;
+}
+.Flexbox h1 {
+  text-align: left;
+  font-size: 1.6em;
+  color: #4d7994;
+}
+.Flexbox p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: black;
+  text-align: justify;
+}
+.SectionTitle {
+  font-size: 2.8em;
+  color: #4d7994;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.titleSecond {
+  margin-top: 30px;
+  font-size: 0.5em;
+  display: block;
+  line-height: 1.2em;
+  font-weight: lighter;
+}

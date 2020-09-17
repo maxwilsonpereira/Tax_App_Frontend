@@ -1,0 +1,158 @@
+.AppContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+}
+.SectionDescription {
+  padding: 30px 60px;
+  font-size: 1.3em;
+  text-align: justify;
+  color: #444444;
+}
+.SectionDescriptionMain {
+  padding: 0px 20px 0px 40px;
+  font-size: 1.3em;
+  text-align: center;
+  color: #444444;
+}
+.SectionDescriptionCentered {
+  padding: 10px 60px;
+  font-size: 1.3em;
+  text-align: center;
+  color: #444444;
+}
+.SectionTitle {
+  padding: 30px 10px 10px 10px;
+  font-size: 2.8em;
+  color: #4d7994;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.SectionSutittle {
+  color: #444444;
+}
+.ImgSobre {
+  width: 80%;
+  max-width: 500px;
+}
+.PagamentoContainer {
+  /* padding: 10px; */
+  background-color: #f3f3f3;
+  /* background-color: #f3f3f3; */
+  border-radius: 10px;
+  /* margin-left: 15px; */
+  margin-right: 20px;
+  max-height: 600px;
+  max-width: 220px;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  color: white;
+}
+.TarjaComprar {
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  background-color: #8f2c31;
+}
+.CompraCondicoes {
+  text-align: center;
+  padding: 20px 5px;
+  color: #535353;
+}
+.CompraCondicoes h3 {
+  font-size: 2em;
+  color: #535353;
+}
+.CompraCondicoes h1 {
+  font-size: 3em;
+  color: #fb5f2e;
+}
+.CompraCondicoes h5 {
+  font-size: 1.2em;
+}
+.FontOrange {
+  color: #fb5f2e;
+}
+.LineThrough {
+  text-decoration: line-through;
+  font-weight: 200;
+}
+.Parcelas {
+  font-weight: 300;
+  font-size: 1.5em;
+}
+.SectionBlueDark {
+  background-color: #145a83;
+}
+.FormasPagamento {
+  width: 90%;
+  padding: 10px;
+}
+.MercadoPago {
+  padding: 10px;
+  width: 60%;
+}
+.GridComprar {
+  display: grid;
+  grid-template-columns: 70% 25%; /* 2 columns */
+  box-sizing: border-box;
+  justify-content: space-around;
+  column-gap: 20px;
+  padding: 40px 0px;
+}
+.GridComprar > div {
+  margin-left: auto;
+  margin-right: auto;
+  color: #444444;
+  /* padding: 30px 20px; */
+}
+.GridComprar p {
+  text-align: justify;
+}
+/* // NOT IN USE: */
+.GridFooter a {
+  color: white;
+  line-height: 1.6em;
+  transition: 0.2s;
+}
+.GridFooter a:hover {
+  color: #fb5f2e;
+}
+@media (max-width: 900px) {
+  .GridComprar {
+    grid-template-columns: 90%; /* 1 Column */
+    column-gap: 0px;
+    /* padding: 10px; */
+  }
+  .PagamentoContainer {
+    margin-left: 15px;
+    margin-right: 15px;
+    max-width: 500px;
+  }
+  .CompraCondicoes {
+    padding: 15px;
+  }
+  .MobileDontShow {
+    display: none;
+  }
+  .SectionDescriptionMain {
+    padding: 0px 20px 0px 20px;
+  }
+  .FormasPagamento {
+    width: 60%;
+    padding: 10px 30px 10px 0px;
+  }
+  .MercadoPago {
+    padding: 10px;
+    width: 30%;
+  }
+  .CompraCondicoes h5 {
+    text-align: left;
+    margin-left: 30px;
+  }
+}

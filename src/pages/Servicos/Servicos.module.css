@@ -1,0 +1,35 @@
+.AppContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+}
+.SectionDescription {
+  padding: 30px 60px;
+  font-size: 1.3em;
+  text-align: justify;
+  color: #444444;
+}
+.SectionDescriptionCentered {
+  padding: 30px 60px;
+  font-size: 1.3em;
+  text-align: center;
+  color: #444444;
+}
+.SectionTitle {
+  font-size: 2.8em;
+  color: #4d7994;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.ImgSobre {
+  width: 80%;
+  max-width: 500px;
+}
+.SectionGrey {
+  background-color: #f3f3f3;
+}
+.SectionBlueDark {
+  background-color: #145a83;
+}

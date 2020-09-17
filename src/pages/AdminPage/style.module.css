@@ -1,0 +1,67 @@
+.AdmPageContainer {
+  max-width: 800px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+}
+.SectionGrey {
+  background-color: #f3f3f3;
+}
+.SectionTitle {
+  font-size: 2.8em;
+  color: #4d7994;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+}
+.SectionDescription {
+  padding: 20px 40px;
+  font-size: 1.3em;
+  color: #444444;
+  max-width: 1200px;
+  margin: 0 auto !important;
+  float: none !important;
+}
+
+.tableUsers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.tableUsers td,
+.tableUsers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.tableUsers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.tableUsers tr:hover {
+  background-color: #ddd;
+}
+.tableUsers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  /* background-color: #535353; */
+  color: black;
+}
+.tableDarker {
+  background-color: #4d7994;
+}
+
+.colorsWebSite {
+  color: #8f2c31;
+  color: #0155a0; /* hover */
+  color: #4d7994; /* Section Title */
+  color: #444444;
+  color: #fb5f2e; /* DISCOUNT */
+  background-color: #31ae75;
+  color: #e8ba3c;
+  background-color: #145a83; /* Comprar Declaração Box */
+  background-color: #033959; /* FOOTER */
+  background-color: #f3f3f3; /* SectionGrey */
+  background-color: #535353; /* SectionGreyDark */
+  background-color: #145a83; /* SectionBlueDark */
+}

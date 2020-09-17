@@ -1,0 +1,57 @@
+.RedBtn {
+  color: white;
+  padding: 20px 40px;
+  font-size: 1.4em;
+  width: 200px;
+  border-radius: 10px;
+  background-color: #8f2c31;
+  box-sizing: border-box;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #470306;
+  transition: 0.3s;
+}
+.RedBtn:hover {
+  color: white;
+  background-color: #62070b;
+  transform: translateY(-6%);
+  box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  -webkit-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+}
+.GreenBtn {
+  color: white;
+  padding: 20px 40px;
+  width: 200px;
+  font-size: 1.4em;
+  border-radius: 10px;
+  background-color: #31ae75;
+  box-sizing: border-box;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #035530;
+  transition: 0.3s;
+}
+.GreenBtn:hover {
+  color: white;
+  background-color: #138653;
+  transform: translateY(-6%);
+  box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  -webkit-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+}
+
+.colorsWebSite {
+  color: #8f2c31;
+  color: #0155a0; /* hover */
+  color: #4d7994; /* Section Title */
+  color: #444444;
+  color: #fb5f2e; /* DISCOUNT */
+  background-color: #31ae75;
+  color: #e8ba3c;
+  background-color: #145a83; /* Comprar Declaração Box */
+  background-color: #033959; /* FOOTER */
+  background-color: #f3f3f3; /* SectionGrey */
+  background-color: #535353; /* SectionGreyDark */
+  background-color: #145a83; /* SectionBlueDark */
+}

@@ -1,0 +1,30 @@
+.SideDrawerContainer {
+  /* position: absolute; */
+  text-align: center;
+  /* border-radius: 20px; */
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  right: 0;
+  padding: 10px 0px;
+  z-index: 2;
+}
+.SideDrawerContainer a {
+  text-transform: none;
+  display: inline-block;
+  padding: 10px;
+  margin: 1px;
+  width: 96%;
+  background-color: #316e99;
+  color: white;
+  font-size: 1.3em;
+}
+.SideDrawerContainer a:hover {
+  color: #8f2c31;
+  background-color: #ffffff;
+}
+.LogoImg {
+  transform: translateX(-10%);
+  width: 90%;
+  padding: 10px 40px;
+}

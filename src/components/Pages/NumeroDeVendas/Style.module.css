@@ -1,0 +1,26 @@
+.FlexboxNumbers {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.FlexboxNumbers > div {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.AppContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Numbers h1 {
+  color: #fb5f2e; /* DISCOUNT */
+  font-size: 6em;
+}
+.Numbers h3 {
+  color: #444444;
+  font-weight: normal;
+  font-size: 2em;
+}
+.CenterAligned {
+  text-align: center;
+}

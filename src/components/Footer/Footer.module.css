@@ -1,0 +1,68 @@
+.AppContainerFooter {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.SectionColor {
+  background-color: #033959;
+}
+.GridFooter {
+  display: grid;
+  grid-template-columns: 30% 20% 20% 20%;
+  box-sizing: border-box;
+  justify-content: space-around;
+  column-gap: 50px;
+  padding: 40px;
+}
+.GridFooter > div {
+  color: white;
+  /* flex: 1 1 200px;
+  padding: 30px 20px; */
+}
+.GridFooter h3 {
+  font-weight: 300;
+  line-height: 1.6em;
+  font-size: 1.4em;
+  margin-top: 12px;
+}
+.GridFooter a {
+  color: white;
+  line-height: 1.6em;
+  transition: 0.2s;
+}
+.GridFooter p {
+  font-size: 1.2em;
+  transition: 0.2s;
+}
+.GridFooter a:hover {
+  color: #fb5f2e;
+}
+.LogoFooter {
+  width: 100%;
+}
+.FooterDown {
+  width: 100%;
+  float: left;
+  background-color: #242424;
+  padding: 15px 0;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 1000px) {
+  .GridFooter {
+    grid-template-columns: 40% 20%;
+    column-gap: 0px;
+    padding: 40px 40px 10px 40px;
+  }
+  .GridFooter > div {
+    margin-bottom: 40px;
+  }
+}
+/* ***** MOBILE ***** */
+@media (max-width: 700px) {
+  .GridFooter {
+    grid-template-columns: 80%;
+    text-align: center;
+  }
+}
