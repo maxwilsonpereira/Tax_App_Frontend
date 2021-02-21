@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import * as actionTypes from "../../../store/actions/actionsIndex";
 import { connect } from "react-redux";
-// import * as actionTypes from "../../../store/actions/actionsIndex";
 
 import classes from "./Cadastro.module.css";
 import ButtonFunc from "../../UI/Buttons/ButtonFunc";
+
+import serverURL from "../../../serverURL";
 
 function Cadastro(props) {
   const [name, setName] = useState("");
@@ -140,7 +141,7 @@ function Cadastro(props) {
       );
     } else if (props.children === "CADASTRAR") {
       // CADASTRAR USUÁRIO:
-      fetch("http://localhost:8080/users", {
+      fetch(`${serverURL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -194,9 +195,10 @@ function Cadastro(props) {
           Nenhuma mudança foi efetuada!
         </div>
       );
+      throw new Error("Nenhuma mudança foi efetuada!");
     } else {
       // ALTERAR USUÁRIO:
-      fetch("http://localhost:8080/users/" + props.userId, {
+      fetch(`${serverURL}/users/` + props.userId, {
         method: "PUT",
         headers: {
           //   // "Bearer " is a convention of Authentication Token:
@@ -211,31 +213,49 @@ function Cadastro(props) {
         }),
       })
         .then((res) => {
-          if (res.status !== 200 && res.status !== 201) {
+          if (res.status == 409) {
+            setErrMessageAux(
+              <div className={classes.ErrorMessage}>Email já cadastrado!</div>
+            );
+            throw new Error("Email já cadastrado!");
+            // return;
+          } else if (res.status !== 200 && res.status !== 201) {
             setErrMessageAux(
               <div className={classes.ErrorMessage}>
                 Favor tentar mais tarde!
               </div>
             );
-            return;
+            throw new Error("Favor tentar mais tarde!");
+            // return;
           }
           return res.json();
         })
         .then((resData) => {
-          setErrMessageAux(
-            <div className={classes.ErrorMessage}>Informações atualizadas!</div>
-          );
           props.alterarInfosToggleFunc();
           props.onUpdate(
             resData.user.email,
             resData.user.name,
             resData.user.telephone
           );
+          setErrMessageAux(
+            <div className={classes.ErrorMessage}>Informações atualizadas!</div>
+          );
         })
         .catch((err) => {
-          setErrMessageAux(
-            <div className={classes.ErrorMessage}>Erro de conexão!</div>
-          );
+          if (err.status == 409) {
+            setErrMessageAux(
+              <div className={classes.ErrorMessage}>Email já cadastrado!</div>
+            );
+            throw new Error("Email já cadastrado!");
+            // return;
+          } else {
+            setErrMessageAux(
+              <div className={classes.ErrorMessage}>
+                Favor tentar mais tarde!
+              </div>
+            );
+            // return;
+          }
         });
     }
   }

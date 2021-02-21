@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import classes from "./style.module.css";
 
+import serverURL from "../../serverURL";
+
 export default function AdminPage() {
   const [messageUser, setMessageUser] = useState("");
   const [users, setUsers] = useState([]);
@@ -9,7 +11,7 @@ export default function AdminPage() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:8080/users", {
+    fetch(`${serverURL}/users`, {
       headers: {
         // "Bearer " is a convention of Authentication Token:
         Authorization: "Bearer " + token,

@@ -1,8 +1,11 @@
 import * as actionTypes from "./actionsTypes";
 
+import serverURL from "../../serverURL";
+
 export const login = (email, password) => {
+  // alert(serverURL);
   return (dispatch) => {
-    fetch("http://localhost:8080/users/login", {
+    fetch(`${serverURL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

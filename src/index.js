@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 
 // ********** REDUX ********** //
 // npm install --save redux AND npm install --save react-redux
-// compose allows the use of more enhancers together. In this case,
+// Compose allows the use of more enhancers together. In this case,
 // to be abble to use ReduxDev Tools Chrome extension.
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 // combineReducers is used to merge all reducers files into one.

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import classes from "./Style.module.css";
 import ButtonFunc from "../../UI/Buttons/ButtonFunc";
 
+import serverURL from "../../../serverURL";
+
 // npm i react-icons
 // https://react-icons.github.io/react-icons/
 import { MdEmail } from "react-icons/md";
@@ -95,7 +97,7 @@ export default function Contato(props) {
       return;
     } else {
       // SENDING MESSAGE:
-      fetch("http://localhost:8080/emails", {
+      fetch(`${serverURL}/emails`, {
         method: "POST",
         body: JSON.stringify({
           name: name,

@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import classes from "./Cadastro.module.css";
 import ButtonFunc from "../../UI/Buttons/ButtonFunc";
 
+import serverURL from "../../../serverURL";
+
 function Cadastro(props) {
   const [name, setName] = useState("");
   const [emailCadastro, setEmailCadastro] = useState("");
@@ -136,7 +138,7 @@ function Cadastro(props) {
       );
     } else if (props.children === "CADASTRAR") {
       // CADASTRAR USUÁRIO:
-      fetch("http://localhost:8080/users", {
+      fetch(`${serverURL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -191,7 +193,7 @@ function Cadastro(props) {
       );
     } else {
       // ALTERAR USUÁRIO:
-      fetch("http://localhost:8080/users/" + props.userId, {
+      fetch(`${serverURL}/users/` + props.userId, {
         method: "PUT",
         headers: {
           //   // "Bearer " is a convention of Authentication Token:

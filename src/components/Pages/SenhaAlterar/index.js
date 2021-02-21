@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import classes from "./Style.module.css";
 import ButtonFunc from "../../UI/Buttons/ButtonFunc";
 
+import serverURL from "../../../serverURL";
+
 export default function SenhaAlterar(props) {
   const [senhaAtual, setSenhaAtual] = useState("");
   const [senhaNova, setSenhaNova] = useState("");
@@ -50,7 +52,7 @@ export default function SenhaAlterar(props) {
     }
     // CONFERINDO PASSWORD ATUAL:
     const userId = localStorage.getItem("currentUserId");
-    fetch("http://localhost:8080/users/password/" + userId, {
+    fetch(`${serverURL}/users/password/` + userId, {
       method: "PUT",
       headers: {
         // "Bearer " is a convention of Authentication Token:
