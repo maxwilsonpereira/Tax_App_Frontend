@@ -1,84 +1,59 @@
-import * as actionTypes from "./actionsTypes";
+import axios from 'axios';
+import * as actionTypes from './actionsTypes';
+import serverURL from '../../serverURL';
 
-import serverURL from "../../serverURL";
+export const login = (email, password) => async (dispatch) => {
+  const body = { email: email, password: password };
+  let message = '';
+  let loginSucceed = false;
+  try {
+    const response = await axios.post(`${serverURL}/users/login`, body);
+    loginSucceed = true;
+    dispatch(
+      loginExec(
+        loginSucceed,
+        message,
+        email,
+        response.data.name,
+        response.data.telephone,
+        response.data.id,
+        response.data.token
+      )
+    );
+  } catch (err) {
+    if (err.response) {
+      switch (err.response.status) {
+        case 404:
+          message = 'Email Não Cadastrado!';
+          break;
+        case 401:
+          message = 'Senha Incorreta!';
+          break;
+        default:
+          message = 'Erro de Conexão. Favor entrar em contato.';
+          break;
+      }
+    } else {
+      message = 'Erro de Conexão. Favor entrar em contato.';
+    }
 
-export const login = (email, password) => {
-  // alert(serverURL);
-  return (dispatch) => {
-    fetch(`${serverURL}/users/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 404) {
-          dispatch(loginExec("false", password, "name", "telephone", "id"));
-          setTimeout(() => {
-            dispatch(errorMessageEraser());
-          }, 3000);
-        } else if (res.status === 401) {
-          dispatch(loginExec(email, "false", "name", "telephone", "id"));
-          setTimeout(() => {
-            dispatch(errorMessageEraser());
-          }, 3000);
-        } else if (res.status !== 200 && res.status !== 201) {
-          dispatch(loginExec(email, "error", "name", "telephone", "id"));
-          setTimeout(() => {
-            dispatch(errorMessageEraser());
-          }, 3000);
-        } else {
-          return res.json().then((resData) => {
-            // console.log(resData.name, resData.email, resData.telephone);
-            dispatch(
-              loginExec(
-                email,
-                password,
-                resData.name,
-                resData.telephone,
-                resData.id,
-                resData.token
-              )
-            );
-            setTimeout(() => {
-              dispatch(errorMessageEraser());
-            }, 3000);
-          });
-        }
-      })
-      .catch((err) => {
-        dispatch(loginExec(email, "error", "name", "telephone", "id"));
-        setTimeout(() => {
-          dispatch(errorMessageEraser());
-        }, 3000);
-      });
-  };
+    dispatch(loginExec(loginSucceed, message));
+  }
+  setTimeout(() => {
+    dispatch(errorMessageEraser());
+  }, 8000);
 };
 
-export const loginExec = (email, password, name, telephone, id, token) => {
-  if (email === "false") {
-    return {
-      type: actionTypes.LOGIN,
-      validLogin: false,
-      errMessage: "Email Não Cadastrado!",
-    };
-  } else if (password === "false") {
-    return {
-      type: actionTypes.LOGIN,
-      validLogin: false,
-      errMessage: "Senha Incorreta!",
-    };
-  } else if (password === "error") {
-    return {
-      type: actionTypes.LOGIN,
-      validLogin: false,
-      errMessage: "Erro de Conexão. Favor entrar em contato.",
-    };
-  } else {
+export const loginExec = (
+  loginSucceed,
+  message,
+  email,
+  name,
+  telephone,
+  id,
+  token
+) => {
+  if (loginSucceed) {
     return {
       type: actionTypes.LOGIN,
       validLogin: true,
@@ -87,6 +62,12 @@ export const loginExec = (email, password, name, telephone, id, token) => {
       telephone: telephone,
       id: id,
       token: token,
+    };
+  } else {
+    return {
+      type: actionTypes.LOGIN,
+      validLogin: false,
+      errMessage: message,
     };
   }
 };

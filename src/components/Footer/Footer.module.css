@@ -1,11 +1,14 @@
+.root {
+  background-color: #033959;
+  margin-top: auto;
+}
+
 .AppContainerFooter {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
-.SectionColor {
-  background-color: #033959;
-}
+
 .GridFooter {
   display: grid;
   grid-template-columns: 30% 20% 20% 20%;

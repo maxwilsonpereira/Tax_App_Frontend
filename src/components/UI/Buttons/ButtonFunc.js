@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 // import { useHistory } from "react-router-dom";
 // import { HashLink as Link } from "react-router-hash-link";
 
-import classes from "./ButtonBuy.module.css";
-import clickSound from "../../../assets/sounds/click.mp3";
+import classes from './ButtonBuy.module.css';
+import clickSound from '../../../assets/sounds/click.mp3';
 
 export default function ButtonBuy(props) {
   // let history = useHistory();
@@ -17,8 +17,9 @@ export default function ButtonBuy(props) {
   };
   return (
     <button
-      onClick={playAudioHandler}
-      className={[classes.ButtonBuy, classes[props.btnColor]].join(" ")}
+      // onClick={playAudioHandler}
+      onClick={props.function}
+      className={[classes.ButtonBuy, classes[props.btnColor]].join(' ')}
     >
       {props.children}
     </button>

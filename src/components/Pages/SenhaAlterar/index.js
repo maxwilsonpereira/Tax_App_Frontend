@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import classes from "./Style.module.css";
-import ButtonFunc from "../../UI/Buttons/ButtonFunc";
+import classes from './Style.module.css';
+import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 
-import serverURL from "../../../serverURL";
+import serverURL from '../../../serverURL';
 
 export default function SenhaAlterar(props) {
-  const [senhaAtual, setSenhaAtual] = useState("");
-  const [senhaNova, setSenhaNova] = useState("");
+  const [senhaAtual, setSenhaAtual] = useState('');
+  const [senhaNova, setSenhaNova] = useState('');
   const [senhaNovaConfirma, setSenhaNovaConfirma] = useState(
-    "Confirmar Senha Nova"
+    'Confirmar Senha Nova'
   );
   const [messageToUser, setMessageToUser] = useState(null);
 
@@ -33,6 +33,7 @@ export default function SenhaAlterar(props) {
   // }
 
   function changePassHandler(e) {
+    // CONFERIR SE SENHA NOVA: COM O BACKEND! Onde colocar? 21/03/2021
     // FRONTEND VALIDATION:
     e.preventDefault();
     if (senhaNova.length < 5 || senhaNovaConfirma.length < 5) {
@@ -51,13 +52,13 @@ export default function SenhaAlterar(props) {
       return;
     }
     // CONFERINDO PASSWORD ATUAL:
-    const userId = localStorage.getItem("currentUserId");
+    const userId = localStorage.getItem('currentUserId');
     fetch(`${serverURL}/users/password/` + userId, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
         // "Bearer " is a convention of Authentication Token:
         // Authorization: "Bearer " + this.props.token,
-        "Content-Type": "Application/json",
+        'Content-Type': 'Application/json',
       },
       body: JSON.stringify({
         password: senhaAtual,
@@ -70,22 +71,22 @@ export default function SenhaAlterar(props) {
           // newPassSuccess is a function on <SenhaAlterar /> that
           // closes the inputs and set message to user:
           props.newPassSuccess();
-          setSenhaNova("");
-          setSenhaNovaConfirma("");
+          setSenhaNova('');
+          setSenhaNovaConfirma('');
           return;
         } else if (res.status === 404) {
           setMessageToUser(
             <div className={classes.MessageToUser}>Usuário não encontrado!</div>
           );
-          setSenhaNova("");
-          setSenhaNovaConfirma("");
+          setSenhaNova('');
+          setSenhaNovaConfirma('');
           return;
         } else if (res.status === 401) {
           setMessageToUser(
             <div className={classes.MessageToUser}>A senha não confere!</div>
           );
-          setSenhaNova("");
-          setSenhaNovaConfirma("");
+          setSenhaNova('');
+          setSenhaNovaConfirma('');
           return;
         } else if (res.status !== 200 && res.status !== 201) {
           setMessageToUser(
@@ -93,7 +94,7 @@ export default function SenhaAlterar(props) {
               Erro de conexão. Favor entrar em contato.
             </div>
           );
-          throw new Error("!== 200 Erro de conexão. Favor entrar em contato.");
+          return;
         }
         return res.json();
       })
@@ -103,9 +104,9 @@ export default function SenhaAlterar(props) {
             Erro de conexão. Favor entrar em contato.
           </div>
         );
-        setSenhaAtual("");
-        setSenhaNova("");
-        setSenhaNovaConfirma("");
+        setSenhaAtual('');
+        setSenhaNova('');
+        setSenhaNovaConfirma('');
       });
   }
 

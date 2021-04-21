@@ -1,3 +1,5 @@
+// VARIABLES:
+@import '../../../styles/variables.module.scss';
 .AppContainer {
   max-width: 1000px;
   margin-left: auto;
@@ -9,26 +11,25 @@
 .CenterAligned {
   text-align: center;
 }
-
-.CadastroStyle h1 {
+.LoginStyle h1 {
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
   text-align: left;
   color: #4d7994;
   font-size: 3.5em;
 }
-.CadastroStyle h2 {
+.LoginStyle h2 {
   text-align: left;
   color: white;
   font-size: 1.2em;
   font-weight: normal;
 }
-.CadastroStyle h3 {
+.LoginStyle h3 {
   text-align: left;
   color: white;
   font-size: 1.2em;
   font-weight: normal;
 }
-.CadastroStyle div {
+.LoginStyle div {
   padding: 0;
   margin: 0;
 }
@@ -38,21 +39,8 @@
 }
 .SubmitBtn {
   text-align: right;
-  height: 30px;
 }
-.SubmitBtn button {
-  margin-left: 10px;
-}
-.MarginLeft10 {
-  margin-left: 10px;
-}
-.noTitle {
-  display: none;
-}
-.BoldFont {
-  font-weight: bold;
-}
-.CadastroStyle input,
+.LoginStyle input,
 textarea {
   width: 100%;
   margin: 15px 0;
@@ -65,34 +53,36 @@ textarea {
   border-width: 0px;
   box-shadow: inset 0px 0px 5px 2px rgb(0, 0, 0);
 }
-.CadastroStyle textarea {
+.LoginStyle textarea {
   min-height: 150px;
   resize: none;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.CadastroStyle input:focus {
+.LoginStyle input:focus {
   box-shadow: inset 0px 0px 2px 1px rgb(0, 0, 0);
 }
-.CadastroStyle textarea:focus {
+.LoginStyle textarea:focus {
   box-shadow: inset 0px 0px 2px 1px rgb(0, 0, 0);
 }
-.CadastroStyle input:valid {
+.LoginStyle input:valid {
   background-color: rgb(232, 240, 254) !important;
+}
+.noTitle {
+  display: none;
 }
 .ErrorMessage {
   text-align: center;
   border-radius: 10px;
   font-size: 1.5em;
   padding: 10px !important;
-  background-color: #8f2c31;
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-  color: white;
+  // background-color: #8f2c31;
+  // box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  color: $redLight;
 }
-/* NEXT TO HIDE password inputs from form when user is logged: */
-.DontShow {
-  display: none;
+.progressCircle {
+  text-align: center;
 }

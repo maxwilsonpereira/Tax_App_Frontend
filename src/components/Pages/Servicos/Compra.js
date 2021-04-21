@@ -13,7 +13,6 @@ export default function Compra(props) {
   // let history = useHistory();
 
   // SAVING CURRENT PRODUCT'S ID:
-
   useEffect(() => {
     if (props.discount < 1) {
       setNoDiscountPrice(null);

@@ -1,18 +1,19 @@
+// VARIABLES:
+@import '../../styles/variables.module.scss';
+
+.rootSection {
+  text-align: center;
+  // background-color: #f3f3f3;
+}
 .AdmPageContainer {
   max-width: 800px;
   padding: 20px;
   margin-left: auto;
   margin-right: auto;
 }
-.CenterAligned {
-  text-align: center;
-}
-.SectionGrey {
-  background-color: #f3f3f3;
-}
 .SectionTitle {
   font-size: 2.8em;
-  color: #4d7994;
+  color: $blueLight;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
 }
 .SectionDescription {
@@ -23,9 +24,17 @@
   margin: 0 auto !important;
   float: none !important;
 }
-
+.errorMessage {
+  color: darkred;
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
+// CENTERED:
+.progressCircle {
+  margin-top: 50px;
+}
 .tableUsers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -38,7 +47,7 @@
   background-color: #f2f2f2;
 }
 .tableUsers tr:hover {
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }
 .tableUsers th {
   padding-top: 12px;
@@ -48,7 +57,7 @@
   color: black;
 }
 .tableDarker {
-  background-color: #4d7994;
+  background-color: $blueLight;
 }
 
 .colorsWebSite {

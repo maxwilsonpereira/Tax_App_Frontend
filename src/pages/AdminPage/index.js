@@ -1,76 +1,77 @@
-import React, { useState, useEffect } from "react";
-
-import classes from "./style.module.css";
-
-import serverURL from "../../serverURL";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import classes from './style.module.scss';
+import serverURL from '../../serverURL';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function AdminPage() {
-  const [messageUser, setMessageUser] = useState("");
+  const [messageUser, setMessageUser] = useState(null);
   const [users, setUsers] = useState([]);
-
-  const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(true);
+  const isUserLogged = localStorage.getItem('userIsLogged');
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`${serverURL}/users`, {
-      headers: {
-        // "Bearer " is a convention of Authentication Token:
-        Authorization: "Bearer " + token,
-        "Content-Type": "Application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200) {
+    if (isUserLogged) {
+      async function getUsers() {
+        try {
+          const users = await axios.get(`${serverURL}/users`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUsers(users.data.users);
+          setLoading(false);
+        } catch (err) {
+          console.log('ERR: ', err);
+          setLoading(false);
           setMessageUser(
-            "Failed to fetch users! Please enter in contact with Max Wilson!"
+            <h2 className={classes.errorMessage}>Connection error!</h2>
           );
-          throw new Error("Failed to fetch users!");
         }
-        return res.json();
-      })
-      .then((resData) => {
-        setUsers(resData.users);
-        // setMessageUser(
-        //   <>
-        //     <br />
-        //     <h2 style={{ color: "darkred" }}>Users fetched!</h2>
-        //   </>
-        // );
-      })
-      .catch((err) => {
-        setMessageUser(
-          <>
-            <br />
-            <h2 style={{ color: "darkred" }}>Connection error!</h2>
-          </>
-        );
-      });
+      }
+      getUsers();
+    } else {
+      setMessageUser(
+        <h2 className={classes.errorMessage}>User not logged!</h2>
+      );
+      setLoading(false);
+    }
   }, []);
 
   return (
-    <section className={[classes.CenterAligned, classes.SectionGrey].join(" ")}>
+    <section className={classes.rootSection}>
+      <hr />
       <br />
       <h1 className={classes.SectionTitle}>Printing All Registered Users</h1>
       {messageUser}
-      <div className={classes.AdmPageContainer}>
-        <table className={classes.tableUsers}>
-          <tr className={classes.tableDarker}>
-            <th>NAME:</th>
-            <th>EMAIL:</th>
-            <th>TELEPHONE:</th>
-          </tr>
-          {users.map((user) => {
-            return (
-              <tr>
-                <th>{user.name}</th>
-                <th>{user.email}</th>
-                <th>{user.telephone}</th>
+      {loading && (
+        <div className={classes.progressCircle}>
+          <CircularProgress color="inherit" />
+        </div>
+      )}
+      {users.length > 0 && (
+        <>
+          <div className={classes.AdmPageContainer}>
+            <table className={classes.tableUsers}>
+              <tr className={classes.tableDarker}>
+                <th>NAME:</th>
+                <th>EMAIL:</th>
+                <th>TELEPHONE:</th>
               </tr>
-            );
-          })}
-        </table>
-      </div>
-      <br />
-      <br />
+              {users.map((user) => {
+                return (
+                  <tr>
+                    <th>{user.name}</th>
+                    <th>{user.email}</th>
+                    <th>{user.telephone}</th>
+                  </tr>
+                );
+              })}
+            </table>
+          </div>
+          <br />
+          <br />
+        </>
+      )}
     </section>
   );
 }

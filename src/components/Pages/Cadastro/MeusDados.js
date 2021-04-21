@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import * as actionTypes from "../../../store/actions/actionsIndex";
-import { connect } from "react-redux";
+import * as actionTypes from '../../../store/actions/actionsIndex';
+import { connect } from 'react-redux';
 // import * as actionTypes from "../../../store/actions/actionsIndex";
 
-import classes from "./Cadastro.module.css";
-import ButtonFunc from "../../UI/Buttons/ButtonFunc";
+import classes from './styles.module.scss';
+import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 
-import serverURL from "../../../serverURL";
+import serverURL from '../../../serverURL';
 
 function Cadastro(props) {
-  const [name, setName] = useState("");
-  const [emailCadastro, setEmailCadastro] = useState("");
-  const [telephone, setTelephone] = useState("Telefone");
-  const [senhaCadastro, setSenhaCadastro] = useState("Senha");
-  const [senhaConfirma, setSenhaConfirma] = useState("Confirmar Senha");
+  const [name, setName] = useState('');
+  const [emailCadastro, setEmailCadastro] = useState('');
+  const [telephone, setTelephone] = useState('Telefone');
+  const [senhaCadastro, setSenhaCadastro] = useState('Senha');
+  const [senhaConfirma, setSenhaConfirma] = useState('Confirmar Senha');
   const [errMessageAux, setErrMessageAux] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setErrMessageAux(null);
-    }, 3000);
+    }, 6000);
     return () => {
       clearTimeout(timer);
     };
@@ -37,7 +37,7 @@ function Cadastro(props) {
   }, [props.errMessage]);
 
   useEffect(() => {
-    if (props.userIsLogged === "true") {
+    if (props.userIsLogged === 'true') {
       setName(props.userName);
       setEmailCadastro(props.userEmail);
       setTelephone(props.userPhone);
@@ -80,12 +80,12 @@ function Cadastro(props) {
         </div>
       );
     } else if (
-      props.children === "CADASTRAR" &&
-      (name === "Nome" ||
-        emailCadastro === "E-mail" ||
-        telephone === "Telefone" ||
-        senhaCadastro === "Senha" ||
-        senhaConfirma === "Confirmar Senha")
+      props.children === 'CADASTRAR' &&
+      (name === 'Nome' ||
+        emailCadastro === 'E-mail' ||
+        telephone === 'Telefone' ||
+        senhaCadastro === 'Senha' ||
+        senhaConfirma === 'Confirmar Senha')
     ) {
       // alert(props.children);
       setErrMessageAux(
@@ -94,9 +94,9 @@ function Cadastro(props) {
         </div>
       );
     } else if (
-      (props.children === "ALTERAR" && name === "Nome") ||
-      emailCadastro === "E-mail" ||
-      telephone === "Telefone"
+      (props.children === 'ALTERAR' && name === 'Nome') ||
+      emailCadastro === 'E-mail' ||
+      telephone === 'Telefone'
     ) {
       setErrMessageAux(
         <div className={classes.ErrorMessage}>
@@ -128,7 +128,7 @@ function Cadastro(props) {
         </div>
       );
     } else if (
-      props.children === "CADASTRAR" &&
+      props.children === 'CADASTRAR' &&
       senhaCadastro !== senhaConfirma
     ) {
       setErrMessageAux(
@@ -136,12 +136,12 @@ function Cadastro(props) {
           As senhas não são compatíves!
         </div>
       );
-    } else if (props.children === "CADASTRAR") {
+    } else if (props.children === 'CADASTRAR') {
       // CADASTRAR USUÁRIO:
       fetch(`${serverURL}/users`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name: name,
@@ -155,21 +155,21 @@ function Cadastro(props) {
             setErrMessageAux(
               <div className={classes.ErrorMessage}>Email já cadastrado!</div>
             );
-            throw new Error("Email já cadastrado!");
+            return;
           } else if (res.status === 400) {
             setErrMessageAux(
               <div className={classes.ErrorMessage}>
                 Máximo 40 caracteres por campo!
               </div>
             );
-            throw new Error("Falha! Favor entrar em contato!");
+            return;
           } else if (res.status !== 200 && res.status !== 201) {
             setErrMessageAux(
               <div className={classes.ErrorMessage}>
                 Falha no cadastro! Favor entrar em contato!
               </div>
             );
-            throw new Error("Falha! Favor entrar em contato!");
+            return;
           }
           return res.json();
         })
@@ -194,12 +194,12 @@ function Cadastro(props) {
     } else {
       // ALTERAR USUÁRIO:
       fetch(`${serverURL}/users/` + props.userId, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
           //   // "Bearer " is a convention of Authentication Token:
           //   Authorization: "Bearer " + this.props.token,
           // application/json WHEN YOU USE ONLY TEXT!
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name: name,

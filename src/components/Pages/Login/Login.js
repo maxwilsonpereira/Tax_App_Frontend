@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-
-import { connect } from "react-redux";
-import * as actionTypes from "../../../store/actions/actionsIndex";
-
-import classes from "./Login.module.css";
-import ButtonFunc from "../../UI/Buttons/ButtonFunc";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../store/actions/actionsIndex';
+import classes from './styles.module.scss';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 
 function FaleConosco(props) {
-  const [email, setEmail] = useState("E-mail");
-  const [senha, setSenha] = useState("Senha");
+  const [email, setEmail] = useState('E-mail');
+  const [senha, setSenha] = useState('Senha');
   const [errMessageAux, setErrMessageAux] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setErrMessageAux(null);
-    }, 3000);
+    }, 6000);
     return () => {
       clearTimeout(timer);
     };
@@ -24,17 +24,18 @@ function FaleConosco(props) {
     if (!props.errMessage) {
       setErrMessageAux(null);
     } else {
+      setIsLoading(false);
       setErrMessageAux(
         <div className={classes.ErrorMessage}>{props.errMessage}</div>
       );
     }
   }, [props.errMessage]);
 
-  if (email === "") {
-    setEmail("E-mail");
+  if (email === '') {
+    setEmail('E-mail');
   }
-  if (senha === "") {
-    setSenha("Senha");
+  if (senha === '') {
+    setSenha('Senha');
   }
 
   function loginHandler(e) {
@@ -48,6 +49,7 @@ function FaleConosco(props) {
         </div>
       );
     } else {
+      setIsLoading(true);
       props.onLogIn(email, senha);
     }
   }
@@ -88,9 +90,17 @@ function FaleConosco(props) {
         <br />
         <br />
         <div className={classes.SubmitBtn}>
-          <ButtonFunc btnColor={props.btnColor} function={loginHandler}>
-            ENTRAR
-          </ButtonFunc>
+          {isLoading ? (
+            <div className={classes.progressCircle}>
+              <CircularProgress color="inherit" />
+            </div>
+          ) : (
+            <>
+              <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
+                Entrar
+              </ButtonFunc>
+            </>
+          )}
         </div>
       </div>
       <br />

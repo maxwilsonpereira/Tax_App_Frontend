@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 // import { Link } from "react-router-dom";
-import { HashLink as Link } from "react-router-hash-link";
+import { HashLink as Link } from 'react-router-hash-link';
 
-import classes from "./Footer.module.css";
-import logo from "../../assets/logomarca_footer.png";
+import classes from './Footer.module.css';
+import logo from '../../assets/logomarca_footer.png';
 
 export default function Footer() {
   return (
-    <section className={classes.SectionColor}>
+    <section className={classes.root}>
       <div className={classes.AppContainerFooter}>
         <div className={classes.GridFooter}>
           <div>
