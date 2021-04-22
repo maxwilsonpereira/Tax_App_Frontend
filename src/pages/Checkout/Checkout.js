@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import * as actionTypes from "../../store/actions/actionsIndex";
+import * as actionTypes from '../../store/actions/actionsIndex';
 
-import iconImg from "../../assets/checkoutIcon.png";
-import ButtonFunc from "../../components/UI/Buttons/ButtonFunc";
-import Selector from "../../components/UI/Selector/Selector";
-import classes from "./Checkout.module.css";
-import PageTitle from "../../components/Pages/PageTitle/PageTitle";
-import Products from "../../components/Pages/Servicos/Products";
-import Login from "../../components/Pages/Login/Login";
-import Cadastro from "../../components/Pages/Cadastro/Cadastro";
-import CartaoCredito from "../../components/Pages/CartaoCredito";
+import iconImg from '../../assets/checkoutIcon.png';
+import ButtonFunc from '../../components/UI/Buttons/ButtonFunc';
+import Selector from '../../components/UI/Selector/Selector';
+import classes from './Checkout.module.css';
+import PageTitle from '../../components/Pages/PageTitle/PageTitle';
+import Products from '../../components/Pages/Servicos/Products';
+import Login from '../../components/Pages/Login/Login';
+import RegisterUpdate from '../../components/Pages/Cadastro/registerUpdate';
+import CartaoCredito from '../../components/Pages/CartaoCredito';
 
 function Sobre(props) {
   const [loggedInOrNot, setLoggedInOrNot] = useState(null);
@@ -28,10 +28,10 @@ function Sobre(props) {
 
   const [productId, setProductId] = useState(0);
 
-  const currentUsername = localStorage.getItem("currentUsername");
-  const currentUserEmail = localStorage.getItem("currentUserEmail");
+  const currentUsername = localStorage.getItem('currentUsername');
+  const currentUserEmail = localStorage.getItem('currentUserEmail');
 
-  const auxProdId = localStorage.getItem("currentProduct") - 1;
+  const auxProdId = localStorage.getItem('currentProduct') - 1;
 
   // TOTAL PRODUCTS AVAILABLE: 9
   useEffect(() => {
@@ -55,7 +55,7 @@ function Sobre(props) {
     //   history.push("/");
     // }
 
-    if (props.userIsLogged === "true") {
+    if (props.userIsLogged === 'true') {
       // setBtnFinalizarCompra(
       //   <ButtonFunc
       //     className={classes.BtnFinalizar}
@@ -86,7 +86,7 @@ function Sobre(props) {
 
                   <h2
                     className={[classes.FontBlue, classes.InlineBlock].join(
-                      " "
+                      ' '
                     )}
                   >
                     {Products[productId].props.title}
@@ -161,7 +161,7 @@ function Sobre(props) {
 
                   <h2
                     className={[classes.FontBlue, classes.InlineBlock].join(
-                      " "
+                      ' '
                     )}
                   >
                     {Products[productId].props.title}
@@ -242,7 +242,9 @@ function Sobre(props) {
     setLogInComponent(null);
     // TOGGLE CADASTRO:
     if (cadastroComponent === null) {
-      setCadastroComponent(<Cadastro showTitle="noTitle">CADASTRAR</Cadastro>);
+      setCadastroComponent(
+        <RegisterUpdate showTitle="noTitle">CADASTRAR</RegisterUpdate>
+      );
     } else {
       setCadastroComponent(null);
     }
@@ -260,25 +262,25 @@ function Sobre(props) {
     );
     setCartaoCreditoComponent(null);
     setPayBoletoBancario(true);
-    setSelectorCartaoColor("SelectorBlue");
-    setSelectorBoletoColor("SelectorBlueOpposite");
+    setSelectorCartaoColor('SelectorBlue');
+    setSelectorBoletoColor('SelectorBlueOpposite');
   }
   function cartaoDeCreditoHandler(e) {
     e.preventDefault();
     setCartaoCreditoComponent(<CartaoCredito />);
     setBtnFinalizarCompra(null);
     setPayBoletoBancario(false);
-    setSelectorBoletoColor("SelectorBlue");
-    setSelectorCartaoColor("SelectorBlueOpposite");
+    setSelectorBoletoColor('SelectorBlue');
+    setSelectorCartaoColor('SelectorBlueOpposite');
   }
   function finalizarCompraHandler(e) {
     e.preventDefault(e);
-    alert("FINALIZAR COMPRA");
+    alert('FINALIZAR COMPRA');
   }
 
   return (
     <>
-      <div id="start" style={{ position: "absolute", top: "500px" }} />
+      <div id="start" style={{ position: 'absolute', top: '500px' }} />
       <section className={classes.CenterAligned}>
         <PageTitle title="Finalizar Pedido" />
       </section>

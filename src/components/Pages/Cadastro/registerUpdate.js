@@ -36,11 +36,11 @@ function Cadastro(props) {
 
   useEffect(() => {
     if (props.userIsLogged === 'true') {
-      setName(props.userName);
+      setName(props.username);
       setEmailCadastro(props.userEmail);
       setTelephone(props.userPhone);
     }
-  }, [props.userName, props.userEmail, props.userPhone]);
+  }, [props.userIsLogged, props.username, props.userEmail, props.userPhone]);
 
   // if (name === "") {
   //   setName("Nome");
@@ -90,7 +90,6 @@ function Cadastro(props) {
         senhaCadastro === 'Senha' ||
         senhaConfirma === 'Confirmar Senha')
     ) {
-      // alert(props.children);
       setErrMessageAux(
         <div className={classes.ErrorMessage}>
           Favor preencher os campos corretamente!
@@ -147,7 +146,7 @@ function Cadastro(props) {
       return;
     } else if (props.children === 'CADASTRAR') {
       setIsLoading(true);
-      // CADASTRAR USUÁRIO:
+      // ********** CADASTRAR USUÁRIO:
       fetch(`${serverURL}/users`, {
         method: 'POST',
         headers: {
@@ -167,14 +166,6 @@ function Cadastro(props) {
               <div className={classes.ErrorMessage}>Email já cadastrado!</div>
             );
             return;
-          } else if (res.status === 400) {
-            setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>
-                Máximo 40 caracteres por campo!
-              </div>
-            );
-            return;
           } else if (res.status !== 200 && res.status !== 201) {
             setIsLoading(false);
             setErrMessageAux(
@@ -182,11 +173,13 @@ function Cadastro(props) {
                 Falha no cadastro! Favor entrar em contato!
               </div>
             );
+            return;
           }
           return res.json();
         })
         .then((resData) => {
-          // console.log(resData);
+          // receiving the response you coded from the backend
+          console.log(resData);
           props.onLogIn(emailCadastro, senhaCadastro);
         })
         .catch((err) => {
@@ -199,8 +192,8 @@ function Cadastro(props) {
           );
         });
     } else if (
-      // props.children === "ALTERAR" &&
-      name === props.userName &&
+      // ********** UPDATE USER INFOS
+      name === props.username &&
       emailCadastro === props.userEmail &&
       telephone === props.userPhone
     ) {
@@ -211,13 +204,12 @@ function Cadastro(props) {
       );
       return;
     } else {
-      // ALTERAR USUÁRIO:
       setIsLoading(true);
       fetch(`${serverURL}/users/` + props.userId, {
         method: 'PUT',
         headers: {
           //   // "Bearer " is a convention of Authentication Token:
-          //   Authorization: "Bearer " + this.props.token,
+          // Authorization: "Bearer " + this.props.token,
           // application/json WHEN YOU USE ONLY TEXT!
           'Content-Type': 'application/json',
         },
@@ -228,6 +220,7 @@ function Cadastro(props) {
         }),
       })
         .then((res) => {
+          console.log('res: ', res);
           if (res.status === 409) {
             setIsLoading(false);
             setErrMessageAux(
@@ -242,28 +235,35 @@ function Cadastro(props) {
               </div>
             );
             return;
+          } else {
+            return res.json().then((resData) => {
+              console.log('resData: ', resData);
+              props.alterarInfosToggleFunc();
+              // userUpdated is the updated user you are sending from the backend:
+              props.onUpdate(
+                resData.userUpdated.email,
+                resData.userUpdated.name,
+                resData.userUpdated.telephone
+              );
+              setErrMessageAux(
+                <div className={classes.ErrorMessage}>
+                  Informações atualizadas!
+                </div>
+              );
+              setIsLoading(false);
+              return;
+            });
           }
-          return res.json();
-        })
-        .then((resData) => {
-          props.alterarInfosToggleFunc();
-          props.onUpdate(
-            resData.user.email,
-            resData.user.name,
-            resData.user.telephone
-          );
-          setErrMessageAux(
-            <div className={classes.ErrorMessage}>Informações atualizadas!</div>
-          );
-          setIsLoading(false);
         })
         .catch((err) => {
           if (err.status === 409) {
+            setIsLoading(false);
             setErrMessageAux(
               <div className={classes.ErrorMessage}>Email já cadastrado!</div>
             );
-            return; // return;
+            return;
           } else {
+            setIsLoading(false);
             setErrMessageAux(
               <div className={classes.ErrorMessage}>
                 Favor tentar mais tarde!
@@ -368,10 +368,10 @@ const mapStateToProps = (state) => {
   return {
     userIsLogged: state.login.isLogged,
     // errMessage: state.login.errorMessage,
-    userName: state.login.nameCurrentUser,
-    userEmail: state.login.emailCurrentUser,
-    userPhone: state.login.phoneCurrentUser,
-    userId: state.login.idCurrentUser,
+    username: state.login.username,
+    userEmail: state.login.userEmail,
+    userPhone: state.login.userPhone,
+    userId: state.login.userId,
   };
 };
 

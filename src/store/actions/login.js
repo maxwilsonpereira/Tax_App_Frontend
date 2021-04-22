@@ -8,7 +8,9 @@ export const login = (email, password) => async (dispatch) => {
   let loginSucceed = false;
   try {
     const response = await axios.post(`${serverURL}/users/login`, body);
+    console.log('response.data: ', response.data);
     loginSucceed = true;
+    message = 'Loggin in';
     dispatch(
       loginExec(
         loginSucceed,
@@ -36,7 +38,6 @@ export const login = (email, password) => async (dispatch) => {
     } else {
       message = 'Erro de Conexão. Favor entrar em contato.';
     }
-
     dispatch(loginExec(loginSucceed, message));
   }
   setTimeout(() => {

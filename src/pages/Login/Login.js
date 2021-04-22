@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import * as actionTypes from "../../store/actions/actionsIndex";
+import * as actionTypes from '../../store/actions/actionsIndex';
 
-import classes from "./Login.module.css";
-import PageTitle from "../../components/Pages/PageTitle/PageTitle";
+import classes from './Login.module.css';
+import PageTitle from '../../components/Pages/PageTitle/PageTitle';
 
-import Contato from "../../components/Pages/Contato";
-import Duvidas from "../../components/Pages/Duvidas";
-import LoginComponent from "../../components/Pages/Login/Login";
-import Cadastro from "../../components/Pages/Cadastro/Cadastro";
-import MeusDados from "../../components/Pages/Cadastro/MeusDados";
-import GoogleMap from "../../components/Pages/GoogleMap/GoogleMap";
-import BtnAreaCliente from "../../components/UI/Buttons/BtnAreaCliente";
-import SenhaAlterar from "../../components/Pages/SenhaAlterar";
+import Contato from '../../components/Pages/Contato';
+import Duvidas from '../../components/Pages/Duvidas';
+import LoginComponent from '../../components/Pages/Login/Login';
+import RegisterUpdate from '../../components/Pages/Cadastro/registerUpdate';
+import UserData from '../../components/Pages/Cadastro/userData';
+import GoogleMap from '../../components/Pages/GoogleMap/GoogleMap';
+import BtnAreaCliente from '../../components/UI/Buttons/BtnAreaCliente';
+import SenhaAlterar from '../../components/Pages/SenhaAlterar';
 // import BtnFunction from "../../components/UI/Buttons/ButtonFunc";
 
 function Login(props) {
@@ -21,7 +21,7 @@ function Login(props) {
   const [alterarSenhaShow, setAlterarSenhaShow] = useState(null);
   const [alterarInfosToggle, setAlterarInfosToggle] = useState(false);
 
-  const currentUsername = localStorage.getItem("currentUsername");
+  const currentUsername = localStorage.getItem('currentUsername');
   const [messageToUser, setMessageToUser] = useState(null);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function Login(props) {
 
   useEffect(() => {
     // userLogged beggins with FALSE!
-    if (props.userIsLogged === "true") {
+    if (props.userIsLogged === 'true') {
       // USER IS LOGGED:
       setUserLoggedShow(
         <div className={classes.AppContainerLogin}>
@@ -67,22 +67,22 @@ function Login(props) {
             <div>
               {alterarInfosToggle ? (
                 <>
-                  <Cadastro
+                  <RegisterUpdate
                     title="Meus Dados"
                     dontShowPasswordInputs="DontShow"
                     alterarInfosToggleFunc={alterarInfosToggleFunc}
                   >
                     Confirmar
-                  </Cadastro>
+                  </RegisterUpdate>
                 </>
               ) : (
-                <MeusDados
+                <UserData
                   title="Meus Dados"
                   function={alterarInfosToggle}
                   alterarInfosToggleFunc={alterarInfosToggleFunc}
                 >
                   Alterar Informações
-                </MeusDados>
+                </UserData>
               )}
             </div>
           </div>
@@ -100,9 +100,9 @@ function Login(props) {
               />
             </div>
             <div>
-              <Cadastro dontShowCancelBtn="DontShow" title="Cadastro">
+              <RegisterUpdate dontShowCancelBtn="DontShow" title="Cadastro">
                 CADASTRAR
-              </Cadastro>
+              </RegisterUpdate>
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ function Login(props) {
 
   return (
     <>
-      <div id="start" style={{ position: "absolute", top: "0px" }} />
+      <div id="start" style={{ position: 'absolute', top: '0px' }} />
       <section className={classes.CenterAligned}>
         <PageTitle title="Login" />
       </section>

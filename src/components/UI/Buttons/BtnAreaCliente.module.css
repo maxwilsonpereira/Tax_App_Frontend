@@ -14,7 +14,7 @@
 .RedBtn:hover {
   color: white;
   background-color: #62070b;
-  transform: translateY(-6%);
+  /* transform: translateY(-2%); */
   box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
   -webkit-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
@@ -35,7 +35,7 @@
 .GreenBtn:hover {
   color: white;
   background-color: #138653;
-  transform: translateY(-6%);
+  /* transform: translateY(-2%); */
   box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
   -webkit-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
