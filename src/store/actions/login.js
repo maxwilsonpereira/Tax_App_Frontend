@@ -3,12 +3,15 @@ import * as actionTypes from './actionsTypes';
 import serverURL from '../../serverURL';
 
 export const login = (email, password) => async (dispatch) => {
+  dispatch(errorMessageEraser());
   const body = { email: email, password: password };
   let message = '';
   let loginSucceed = false;
+  console.log('body: ', body);
+
   try {
     const response = await axios.post(`${serverURL}/users/login`, body);
-    console.log('response.data: ', response.data);
+    console.log('IM HERE TRY: response.data: ', response.data);
     loginSucceed = true;
     message = 'Loggin in';
     dispatch(
@@ -23,6 +26,7 @@ export const login = (email, password) => async (dispatch) => {
       )
     );
   } catch (err) {
+    console.log('IM HERE ERR: err: ', err);
     if (err.response) {
       switch (err.response.status) {
         case 404:
@@ -40,9 +44,6 @@ export const login = (email, password) => async (dispatch) => {
     }
     dispatch(loginExec(loginSucceed, message));
   }
-  setTimeout(() => {
-    dispatch(errorMessageEraser());
-  }, 8000);
 };
 
 export const loginExec = (

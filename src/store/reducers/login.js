@@ -54,15 +54,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLogged: 'false',
-        errorMessage: null,
-        username: null,
-        userEmail: null,
-        userPhone: null,
+        errorMessage: '',
+        username: '',
+        userEmail: '',
+        userPhone: '',
       };
     case actionTypes.ERR_MESSAGE_ERASER:
       return {
         ...state,
-        errorMessage: null,
+        errorMessage: '',
       };
     default:
       return state;

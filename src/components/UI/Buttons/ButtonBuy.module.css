@@ -8,15 +8,15 @@
   outline: 0;
   border: none;
   border-bottom: 2px solid #9b7c26;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 .ButtonBuy:hover {
   color: #e8ba3c;
   background-color: white;
   /* transform: translateY(-2%); */
-  box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
-  -webkit-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
-  -moz-box-shadow: 0px 25px 21px -17px rgba(0, 0, 0, 0.72);
+  box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
+  -webkit-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
 }
 .BlueBtn {
   background-color: #0155a0;
@@ -28,7 +28,7 @@
 .BlueBtn:hover {
   background-color: white;
   color: #0155a0;
-  border: 1px solid #023058;
+  /* border: 1px solid #023058; */
 }
 
 .OrangeBtn {
@@ -41,7 +41,7 @@
 .OrangeBtn:hover {
   background-color: white;
   color: #e8ba3c;
-  border: 1px solid #bd8d0c;
+  /* border: 1px solid #bd8d0c; */
 }
 
 .BlueOppositeBtn {
@@ -56,7 +56,7 @@
 .BlueOppositeBtn:hover {
   background-color: #0155a0;
   color: white;
-  border: 1px solid #023058;
+  /* border: 1px solid #023058; */
 }
 .GreenOrangeBtn {
   font-size: 1.8em;

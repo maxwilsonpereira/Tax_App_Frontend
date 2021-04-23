@@ -8,27 +8,16 @@ import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 function FaleConosco(props) {
   const [email, setEmail] = useState('E-mail');
   const [senha, setSenha] = useState('Senha');
-  const [errMessageAux, setErrMessageAux] = useState(null);
+  const [errMessageAux, setErrMessageAux] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setErrMessageAux(null);
-    }, 6000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [errMessageAux]);
-
-  useEffect(() => {
-    if (!props.errMessage) {
-      setErrMessageAux(null);
-    } else {
+    if (props.errMessage.length > 1) {
       setIsLoading(false);
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>{props.errMessage}</div>
-      );
     }
+    setErrMessageAux(
+      <div className={classes.ErrorMessage}>{props.errMessage}</div>
+    );
   }, [props.errMessage]);
 
   if (email === '') {
@@ -40,6 +29,8 @@ function FaleConosco(props) {
 
   function loginHandler(e) {
     e.preventDefault();
+    setErrMessageAux('');
+    setIsLoading(true);
     // VALIDATION:
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (!pattern.test(email)) {
@@ -49,7 +40,6 @@ function FaleConosco(props) {
         </div>
       );
     } else {
-      setIsLoading(true);
       props.onLogIn(email, senha);
     }
   }

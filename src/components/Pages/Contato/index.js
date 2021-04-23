@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-
-import classes from "./Style.module.css";
-import ButtonFunc from "../../UI/Buttons/ButtonFunc";
-
-import serverURL from "../../../serverURL";
+import React, { useState, useEffect } from 'react';
+import classes from './styles.module.scss';
+import ButtonFunc from '../../UI/Buttons/ButtonFunc';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import serverURL from '../../../serverURL';
 
 // npm i react-icons
 // https://react-icons.github.io/react-icons/
-import { MdEmail } from "react-icons/md";
-import { MdCall } from "react-icons/md";
+import { MdEmail } from 'react-icons/md';
+import { MdCall } from 'react-icons/md';
 
 export default function Contato(props) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [telephone, setTelephone] = useState('');
+  const [message, setMessage] = useState('');
   const [messageToUser, setMessageToUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const isLogged = localStorage.getItem("userIsLogged");
+  const isLogged = localStorage.getItem('userIsLogged');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,9 +30,9 @@ export default function Contato(props) {
 
   useEffect(() => {
     if (isLogged) {
-      const emailAux = localStorage.getItem("currentUserEmail");
-      const nameAux = localStorage.getItem("currentUsername");
-      const phoneAux = localStorage.getItem("currentUserPhone");
+      const emailAux = localStorage.getItem('currentUserEmail');
+      const nameAux = localStorage.getItem('currentUsername');
+      const phoneAux = localStorage.getItem('currentUserPhone');
       setName(nameAux);
       setEmail(emailAux);
       setTelephone(phoneAux);
@@ -63,10 +63,10 @@ export default function Contato(props) {
       );
       return;
     } else if (
-      name === "Nome" ||
-      email === "E-mail" ||
-      telephone === "Telefone" ||
-      message === "Mensagem"
+      name === 'Nome' ||
+      email === 'E-mail' ||
+      telephone === 'Telefone' ||
+      message === 'Mensagem'
     ) {
       setMessageToUser(
         <div className={classes.MessageToUser}>
@@ -97,8 +97,9 @@ export default function Contato(props) {
       return;
     } else {
       // SENDING MESSAGE:
+      setIsLoading(true);
       fetch(`${serverURL}/emails`, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({
           name: name,
           telephone: telephone,
@@ -108,10 +109,11 @@ export default function Contato(props) {
         headers: {
           // "Bearer " is a convention of Authentication Token:
           // Authorization: "Bearer " + this.props.token,
-          "Content-Type": "Application/json",
+          'Content-Type': 'Application/json',
         },
       })
         .then((res) => {
+          // console.log('RESPONSE: res', res);
           setMessageToUser(
             <div className={classes.MessageToUser}>
               Mensagem enviada com sucesso!
@@ -119,10 +121,11 @@ export default function Contato(props) {
               Em breve entraremos em contato.
             </div>
           );
-          setName("");
-          setEmail("");
-          setTelephone("");
-          setMessage("");
+          setName('');
+          setEmail('');
+          setTelephone('');
+          setMessage('');
+          setIsLoading(false);
         })
         .catch((err) => {
           setMessageToUser(
@@ -132,6 +135,7 @@ export default function Contato(props) {
               Favor tentar mais tarde.
             </div>
           );
+          setIsLoading(false);
         });
     }
   }
@@ -146,12 +150,12 @@ export default function Contato(props) {
 
   return (
     <section
-      className={[classes.CenterAligned, classes[props.backColor]].join(" ")}
+      className={[classes.CenterAligned, classes[props.backColor]].join(' ')}
     >
       <br />
       <div className={classes.AppContainer}>
         <div className={classes.Flexbox}>
-          <div>
+          <div className={classes.flexboxFirstDiv}>
             <h1>{props.title}</h1>
             <br /> <br />
             <h2>{props.description}</h2>
@@ -216,9 +220,20 @@ export default function Contato(props) {
               value={message}
             />
             <div className={classes.SubmitBtn}>
-              <ButtonFunc btnColor={props.btnColor} function={sendEmailHandler}>
-                ENVIAR
-              </ButtonFunc>
+              {isLoading ? (
+                <div className={classes.progressCircle}>
+                  <CircularProgress color="inherit" />
+                </div>
+              ) : (
+                <>
+                  <ButtonFunc
+                    btnColor={props.btnColor}
+                    function={sendEmailHandler}
+                  >
+                    ENVIAR
+                  </ButtonFunc>
+                </>
+              )}
             </div>
             {messageToUser}
           </div>

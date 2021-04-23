@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-
-import classes from './Style.module.css';
+import { connect } from 'react-redux';
+import classes from './styles.module.scss';
 import ButtonFunc from '../../UI/Buttons/ButtonFunc';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import serverURL from '../../../serverURL';
 
-export default function SenhaAlterar(props) {
+function SenhaAlterar(props) {
   const [senhaAtual, setSenhaAtual] = useState('');
   const [senhaNova, setSenhaNova] = useState('');
   const [senhaNovaConfirma, setSenhaNovaConfirma] = useState(
     'Confirmar Senha Nova'
   );
   const [messageToUser, setMessageToUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,7 +44,8 @@ export default function SenhaAlterar(props) {
         </div>
       );
       return;
-    } else if (senhaNova !== senhaNovaConfirma) {
+    }
+    if (senhaNova !== senhaNovaConfirma) {
       setMessageToUser(
         <div className={classes.MessageToUser}>
           As senhas não são compatíves!
@@ -51,9 +53,15 @@ export default function SenhaAlterar(props) {
       );
       return;
     }
-    // CONFERINDO PASSWORD ATUAL:
-    const userId = localStorage.getItem('currentUserId');
-    fetch(`${serverURL}/users/password/` + userId, {
+    if (senhaNova === senhaAtual) {
+      setMessageToUser(
+        <div className={classes.MessageToUser}>As senhas são idénticas!</div>
+      );
+      return;
+    }
+    // UPDATING PASSWORD:
+    setIsLoading(true);
+    fetch(`${serverURL}/users/password/` + props.userId, {
       method: 'PUT',
       headers: {
         // "Bearer " is a convention of Authentication Token:
@@ -66,13 +74,14 @@ export default function SenhaAlterar(props) {
       }),
     })
       .then((res) => {
-        // alert(res.status);
+        console.log('RES: ', res);
         if (res.status === 200) {
           // newPassSuccess is a function on <SenhaAlterar /> that
           // closes the inputs and set message to user:
           props.newPassSuccess();
           setSenhaNova('');
           setSenhaNovaConfirma('');
+          setIsLoading(false);
           return;
         } else if (res.status === 404) {
           setMessageToUser(
@@ -80,23 +89,25 @@ export default function SenhaAlterar(props) {
           );
           setSenhaNova('');
           setSenhaNovaConfirma('');
+          setIsLoading(false);
           return;
-        } else if (res.status === 401) {
+        } else if (res.status === 403) {
           setMessageToUser(
             <div className={classes.MessageToUser}>A senha não confere!</div>
           );
           setSenhaNova('');
           setSenhaNovaConfirma('');
+          setIsLoading(false);
           return;
-        } else if (res.status !== 200 && res.status !== 201) {
+        } else {
           setMessageToUser(
             <div className={classes.MessageToUser}>
               Erro de conexão. Favor entrar em contato.
             </div>
           );
+          setIsLoading(false);
           return;
         }
-        return res.json();
       })
       .catch((err) => {
         setMessageToUser(
@@ -107,6 +118,7 @@ export default function SenhaAlterar(props) {
         setSenhaAtual('');
         setSenhaNova('');
         setSenhaNovaConfirma('');
+        setIsLoading(false);
       });
   }
 
@@ -144,12 +156,28 @@ export default function SenhaAlterar(props) {
       />
       <br />
       <div className={classes.SubmitBtn}>
-        <ButtonFunc btnColor="BlueBtn" function={changePassHandler}>
-          ALTERAR
-        </ButtonFunc>
+        {isLoading ? (
+          <div className={classes.progressCircle}>
+            <CircularProgress color="inherit" />
+          </div>
+        ) : (
+          <>
+            <ButtonFunc btnColor="BlueBtn" function={changePassHandler}>
+              ALTERAR
+            </ButtonFunc>
+          </>
+        )}
       </div>
       <br />
       {messageToUser}
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userId: state.login.userId,
+  };
+};
+
+export default connect(mapStateToProps)(SenhaAlterar);

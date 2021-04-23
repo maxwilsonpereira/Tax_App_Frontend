@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actionTypes from '../../store/actions/actionsIndex';
 
-import classes from './Login.module.css';
+import classes from './styles.module.scss';
 import PageTitle from '../../components/Pages/PageTitle/PageTitle';
 
 import Contato from '../../components/Pages/Contato';
