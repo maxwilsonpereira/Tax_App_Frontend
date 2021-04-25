@@ -32,9 +32,8 @@ function Login(props) {
     props.onHideSideDrawer();
   }, []);
 
-  function alterarInfosToggleFunc(e) {
+  function alterarInfosToggleFunc() {
     props.onEraseAllMessages();
-    // e.preventDefault();
     setAlterarInfosToggle(!alterarInfosToggle);
   }
 
@@ -145,9 +144,15 @@ function Login(props) {
                   function={userLoggedInHandler}
                 />
               </div>
-              <Register dontShowCancelBtn="DontShow" title="Cadastro">
-                Cadastrar
-              </Register>
+              <div>
+                <Register
+                  dontShowCancelBtn="DontShow"
+                  title="Cadastro"
+                  alterarInfosToggleFunc={alterarInfosToggleFunc}
+                >
+                  Cadastrar
+                </Register>
+              </div>
             </div>
           </div>
         </>

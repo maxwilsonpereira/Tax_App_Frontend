@@ -29,10 +29,9 @@ function Cadastro(props) {
     }
   }
 
-  function cancelarHandler(e) {
-    e.preventDefault();
-    props.alterarInfosToggleFunc();
-  }
+  // function cancelarHandler() {
+  //   props.alterarInfosToggleFunc();
+  // }
 
   function cadastrarHandler(e) {
     e.preventDefault();
@@ -253,22 +252,9 @@ function Cadastro(props) {
           </div>
         ) : (
           <div className={classes.btnsContainer}>
-            {/* <div className={classes.btnOne}> */}
             <ButtonFunc btnColor="BtnGreen" function={cadastrarHandler}>
               {props.children}
             </ButtonFunc>
-            {/* </div> */}
-            <div
-              className={[
-                classes.MarginLeft10,
-                classes.btnTwo,
-                classes[props.dontShowCancelBtn],
-              ].join(' ')}
-            >
-              <ButtonFunc btnColor="BlueBtn" function={cancelarHandler}>
-                Cancelar
-              </ButtonFunc>
-            </div>
           </div>
         )}
       </div>

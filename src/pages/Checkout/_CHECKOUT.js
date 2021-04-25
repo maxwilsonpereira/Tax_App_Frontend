@@ -57,7 +57,6 @@ function Sobre(props) {
     // }
 
     if (props.userIsLogged === 'true') {
-      setAvisoLogIn('');
       setLoggedInOrNot(
         <>
           <div className={classes.CenterAligned}>
@@ -152,9 +151,7 @@ function Sobre(props) {
               <h3>
                 Valor da Compra:
                 <br />
-                <span className={classes.fontBlue}>
-                  R$ {Products[productId].props.price}
-                </span>
+                R$ {Products[productId].props.price}
               </h3>
               <br className={classes.MobileOnly} />
             </div>

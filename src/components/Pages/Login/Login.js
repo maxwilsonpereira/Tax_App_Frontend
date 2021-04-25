@@ -46,43 +46,41 @@ function FaleConosco(props) {
 
   return (
     <div className={classes.LoginStyle}>
-      <div>
-        <div className={classes[props.showTitle]}>
-          <h1>Login</h1>
-          <br />
-        </div>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyPress={enterKeyPressedHandler}
-          type="email"
-          required
-          placeholder={email}
-          name={email}
-        />
+      <div className={classes[props.showTitle]}>
+        <h1>Login</h1>
         <br />
-        <input
-          onChange={(e) => setSenha(e.target.value)}
-          onKeyPress={enterKeyPressedHandler}
-          type="password"
-          required
-          placeholder={senha}
-          name={senha}
-        />
-        <br />
-        <br />
-        <div className={classes.SubmitBtn}>
-          {isLoading ? (
-            <div className={classes.progressCircle}>
-              <CircularProgress color="inherit" />
-            </div>
-          ) : (
-            <>
-              <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
-                Entrar
-              </ButtonFunc>
-            </>
-          )}
-        </div>
+      </div>
+      <input
+        onChange={(e) => setEmail(e.target.value)}
+        onKeyPress={enterKeyPressedHandler}
+        type="email"
+        required
+        placeholder={email}
+        name={email}
+      />
+      <br />
+      <input
+        onChange={(e) => setSenha(e.target.value)}
+        onKeyPress={enterKeyPressedHandler}
+        type="password"
+        required
+        placeholder={senha}
+        name={senha}
+      />
+      <br />
+      <br />
+      <div className={classes.SubmitBtn}>
+        {isLoading ? (
+          <div className={classes.progressCircle}>
+            <CircularProgress color="inherit" />
+          </div>
+        ) : (
+          <>
+            <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
+              Entrar
+            </ButtonFunc>
+          </>
+        )}
       </div>
       <div className={classes.ErrorMessage}>{props.messageLogin}</div>
     </div>
