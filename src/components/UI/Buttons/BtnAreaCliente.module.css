@@ -1,41 +1,35 @@
 .RedBtn {
-  color: white;
+  color: #8f2c31;
   padding: 20px 40px;
   font-size: 1.4em;
-  width: 200px;
+  width: 100%;
   border-radius: 10px;
-  background-color: #8f2c31;
+  /* background-color: #8f2c31; */
   box-sizing: border-box;
-  outline: 0;
-  border: none;
-  border-bottom: 2px solid #470306;
+  border: 2px solid #8f2c31;
+  background-color: transparent;
   transition: 0.2s;
 }
 .RedBtn:hover {
-  color: white;
-  background-color: #62070b;
   /* transform: translateY(-2%); */
   box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
   -webkit-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
 }
 .GreenBtn {
-  color: white;
+  color: #035530;
   padding: 20px 40px;
-  width: 200px;
+  width: 100%;
   font-size: 1.4em;
   border-radius: 10px;
-  background-color: #31ae75;
+  background-color: transparent;
   box-sizing: border-box;
   outline: 0;
-  border: none;
-  border-bottom: 2px solid #035530;
+  border: 2px solid #035530;
+
   transition: 0.2s;
 }
 .GreenBtn:hover {
-  color: white;
-  background-color: #138653;
-  /* transform: translateY(-2%); */
   box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
   -webkit-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);

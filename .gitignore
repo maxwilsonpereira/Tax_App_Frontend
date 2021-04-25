@@ -2,6 +2,7 @@
 
 #MAX
 .env
+_DEPLOY.txt
 
 # dependencies
 /node_modules

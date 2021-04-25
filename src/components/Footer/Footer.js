@@ -50,9 +50,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className={classes.FooterDown}>
+      {/* <div className={classes.FooterDown}>
         <p>Todos os direitos reservados. Copyright 2019 Declarção de IR.</p>
-      </div>
+      </div> */}
     </section>
   );
 }

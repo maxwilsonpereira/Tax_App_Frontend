@@ -12,27 +12,7 @@ function Cadastro(props) {
   const [telephone, setTelephone] = useState('Telefone');
   const [senhaCadastro, setSenhaCadastro] = useState('Senha');
   const [senhaConfirma, setSenhaConfirma] = useState('Confirmar Senha');
-  const [errMessageAux, setErrMessageAux] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setErrMessageAux(null);
-    }, 6000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [errMessageAux]);
-
-  useEffect(() => {
-    if (!props.errMessage) {
-      setErrMessageAux(null);
-    } else {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>{props.errMessage}</div>
-      );
-    }
-  }, [props.errMessage]);
 
   useEffect(() => {
     if (props.userIsLogged === 'true') {
@@ -42,84 +22,50 @@ function Cadastro(props) {
     }
   }, [props.userIsLogged, props.username, props.userEmail, props.userPhone]);
 
-  // if (name === "") {
-  //   setName("Nome");
-  // }
-  // if (emailCadastro === "") {
-  //   setEmailCadastro("E-mail");
-  // }
-  // if (telephone === "") {
-  //   setTelephone("Telefone");
-  // }
-  // if (senhaCadastro === "") {
-  //   setSenhaCadastro("Senha");
-  // }
-  // if (senhaConfirma === "") {
-  //   setSenhaConfirma("Confirmar Senha");
-  // }
-
   function enterKeyPressedHandler(event) {
-    // event.preventDefault();
     var code = event.keyCode || event.which;
     if (code === 13) {
-      // alert("ENTER KEY PRESSED!");
       cadastrarHandler(event);
     }
   }
 
   function cancelarHandler(e) {
+    e.preventDefault();
     props.alterarInfosToggleFunc();
   }
 
   function cadastrarHandler(e) {
     e.preventDefault();
+    props.onEraseAllMessages();
     // VALIDATION:
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (!pattern.test(emailCadastro)) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Favor preencher os campos corretamente!
-        </div>
-      );
+      props.onSetMessageCadastro('Favor preencher os campos corretamente!');
       return;
     } else if (
-      props.children === 'CADASTRAR' &&
+      props.children === 'Cadastrar' &&
       (name === 'Nome' ||
         emailCadastro === 'E-mail' ||
         telephone === 'Telefone' ||
         senhaCadastro === 'Senha' ||
         senhaConfirma === 'Confirmar Senha')
     ) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Favor preencher os campos corretamente!
-        </div>
-      );
+      props.onSetMessageCadastro('Favor preencher os campos corretamente!');
       return;
     } else if (
-      (props.children === 'ALTERAR' && name === 'Nome') ||
+      (props.children === 'Alterar' && name === 'Nome') ||
       emailCadastro === 'E-mail' ||
       telephone === 'Telefone'
     ) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Favor preencher os campos corretamente!
-        </div>
-      );
+      props.onSetMessageCadastro('Favor preencher os campos corretamente!');
+
       return;
     } else if (name.length < 3) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Mínimo 3 caracteres para nome!
-        </div>
-      );
+      props.onSetMessageCadastro('Mínimo 3 caracteres para nome!');
+
       return;
     } else if (senhaCadastro.length < 5) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Mínimo 5 caracteres para senha!
-        </div>
-      );
+      props.onSetMessageCadastro('Mínimo 5 caracteres para senha!');
       return;
     } else if (
       name.length > 40 ||
@@ -128,23 +74,16 @@ function Cadastro(props) {
       senhaCadastro.length > 40 ||
       senhaConfirma.length > 40
     ) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Máximo 40 caracteres por campo!
-        </div>
-      );
+      props.onSetMessageCadastro('Máximo 40 caracteres por campo!');
       return;
     } else if (
-      props.children === 'CADASTRAR' &&
+      props.children === 'Cadastrar' &&
       senhaCadastro !== senhaConfirma
     ) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          As senhas não são compatíves!
-        </div>
-      );
+      props.onSetMessageCadastro('As senhas não são compatíves!');
+
       return;
-    } else if (props.children === 'CADASTRAR') {
+    } else if (props.children === 'Cadastrar') {
       setIsLoading(true);
       // ********** CADASTRAR USUÁRIO:
       fetch(`${serverURL}/users`, {
@@ -159,36 +98,29 @@ function Cadastro(props) {
           password: senhaCadastro,
         }),
       })
-        .then((res) => {
-          if (res.status === 409) {
+        .then(async (res) => {
+          if (res.status === 201) {
+            // receiving the response you coded from the backend
+            const responseFromBackend = await res.json();
+            console.log('responseFromBackend: ', responseFromBackend);
+            props.onLogIn(emailCadastro, senhaCadastro);
+          } else if (res.status === 409) {
             setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>Email já cadastrado!</div>
-            );
+            props.onSetMessageCadastro('Email já cadastrado!');
             return;
-          } else if (res.status !== 200 && res.status !== 201) {
+          } else {
             setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>
-                Falha no cadastro! Favor entrar em contato!
-              </div>
+            props.onSetMessageCadastro(
+              'Falha no cadastro! Favor entrar em contato!'
             );
             return;
           }
-          return res.json();
-        })
-        .then((resData) => {
-          // receiving the response you coded from the backend
-          console.log(resData);
-          props.onLogIn(emailCadastro, senhaCadastro);
         })
         .catch((err) => {
           // console.log(err);
           setIsLoading(false);
-          setErrMessageAux(
-            <div className={classes.ErrorMessage}>
-              Falha no cadastro! Favor entrar em contato!
-            </div>
+          props.onSetMessageCadastro(
+            'Falha no cadastro! Favor entrar em contato!'
           );
         });
     } else if (
@@ -197,11 +129,7 @@ function Cadastro(props) {
       emailCadastro === props.userEmail &&
       telephone === props.userPhone
     ) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Nenhuma mudança foi efetuada!
-        </div>
-      );
+      props.onSetMessageCadastro('Nenhuma mudança foi efetuada!');
       return;
     } else {
       setIsLoading(true);
@@ -223,17 +151,11 @@ function Cadastro(props) {
           console.log('res: ', res);
           if (res.status === 409) {
             setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>Email já cadastrado!</div>
-            );
+            props.onSetMessageCadastro('Email já cadastrado!');
             return;
           } else if (res.status !== 200 && res.status !== 201) {
             setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>
-                Favor tentar mais tarde!
-              </div>
-            );
+            props.onSetMessageCadastro('Favor tentar mais tarde!');
             return;
           } else {
             return res.json().then((resData) => {
@@ -245,11 +167,7 @@ function Cadastro(props) {
                 resData.userUpdated.name,
                 resData.userUpdated.telephone
               );
-              setErrMessageAux(
-                <div className={classes.ErrorMessage}>
-                  Informações atualizadas!
-                </div>
-              );
+              props.onSetMessageCadastro('Informações atualizadas!');
               setIsLoading(false);
               return;
             });
@@ -258,17 +176,12 @@ function Cadastro(props) {
         .catch((err) => {
           if (err.status === 409) {
             setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>Email já cadastrado!</div>
-            );
+            props.onSetMessageCadastro('Email já cadastrado!');
+
             return;
           } else {
             setIsLoading(false);
-            setErrMessageAux(
-              <div className={classes.ErrorMessage}>
-                Favor tentar mais tarde!
-              </div>
-            );
+            props.onSetMessageCadastro('Favor tentar mais tarde!');
             return;
           }
         });
@@ -333,33 +246,33 @@ function Cadastro(props) {
           // value={senhaConfirma}
           name={senhaConfirma}
         />
-        <div className={classes.SubmitBtn}>
-          {isLoading ? (
-            <div className={classes.progressCircle}>
-              <CircularProgress color="inherit" />
-            </div>
-          ) : (
-            <>
-              <ButtonFunc btnColor="BlueBtn" function={cadastrarHandler}>
-                {props.children}
+
+        {isLoading ? (
+          <div className={classes.progressCircle}>
+            <CircularProgress color="inherit" />
+          </div>
+        ) : (
+          <div className={classes.btnsContainer}>
+            {/* <div className={classes.btnOne}> */}
+            <ButtonFunc btnColor="BtnGreen" function={cadastrarHandler}>
+              {props.children}
+            </ButtonFunc>
+            {/* </div> */}
+            <div
+              className={[
+                classes.MarginLeft10,
+                classes.btnTwo,
+                classes[props.dontShowCancelBtn],
+              ].join(' ')}
+            >
+              <ButtonFunc btnColor="BlueBtn" function={cancelarHandler}>
+                Cancelar
               </ButtonFunc>
-              <span
-                className={[
-                  classes.MarginLeft10,
-                  classes[props.dontShowCancelBtn],
-                ].join(' ')}
-              >
-                <ButtonFunc btnColor="OrangeBtn" function={cancelarHandler}>
-                  Cancelar
-                </ButtonFunc>
-              </span>
-            </>
-          )}
-        </div>
+            </div>
+          </div>
+        )}
       </div>
-      <br />
-      <br />
-      {errMessageAux}
+      <div className={classes.ErrorMessage}>{props.messageCadastro}</div>
     </div>
   );
 }
@@ -367,11 +280,11 @@ function Cadastro(props) {
 const mapStateToProps = (state) => {
   return {
     userIsLogged: state.login.isLogged,
-    // errMessage: state.login.errorMessage,
     username: state.login.username,
     userEmail: state.login.userEmail,
     userPhone: state.login.userPhone,
     userId: state.login.userId,
+    messageCadastro: state.login.messageCadastro,
   };
 };
 
@@ -380,6 +293,10 @@ const mapDispatchToProps = (dispatch) => {
     onLogIn: (email, senha) => dispatch(actionTypes.login(email, senha)),
     onUpdate: (email, name, telephone) =>
       dispatch(actionTypes.update(email, name, telephone)),
+    onSetMessageCadastro: (message) =>
+      dispatch(actionTypes.setMessageCadastro(message)),
+    onEraseAllMessages: (message) =>
+      dispatch(actionTypes.eraseAllMessages(message)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Cadastro);

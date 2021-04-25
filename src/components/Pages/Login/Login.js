@@ -8,17 +8,13 @@ import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 function FaleConosco(props) {
   const [email, setEmail] = useState('E-mail');
   const [senha, setSenha] = useState('Senha');
-  const [errMessageAux, setErrMessageAux] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (props.errMessage.length > 1) {
+    if (props.messageLogin.length > 1) {
       setIsLoading(false);
     }
-    setErrMessageAux(
-      <div className={classes.ErrorMessage}>{props.errMessage}</div>
-    );
-  }, [props.errMessage]);
+  }, [props.messageLogin]);
 
   if (email === '') {
     setEmail('E-mail');
@@ -29,17 +25,13 @@ function FaleConosco(props) {
 
   function loginHandler(e) {
     e.preventDefault();
-    setErrMessageAux('');
-    setIsLoading(true);
+    props.onSetMessageLogin('');
     // VALIDATION:
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (!pattern.test(email)) {
-      setErrMessageAux(
-        <div className={classes.ErrorMessage}>
-          Favor preencher os campos corretamente!
-        </div>
-      );
+      props.onSetMessageLogin('Favor preencher os campos corretamente!');
     } else {
+      setIsLoading(true);
       props.onLogIn(email, senha);
     }
   }
@@ -48,7 +40,6 @@ function FaleConosco(props) {
     // event.preventDefault();
     var code = event.keyCode || event.which;
     if (code === 13) {
-      // alert("ENTER KEY PRESSED!");
       loginHandler(event);
     }
   }
@@ -93,9 +84,7 @@ function FaleConosco(props) {
           )}
         </div>
       </div>
-      <br />
-      <br />
-      {errMessageAux}
+      <div className={classes.ErrorMessage}>{props.messageLogin}</div>
     </div>
   );
 }
@@ -103,13 +92,15 @@ function FaleConosco(props) {
 const mapStateToProps = (state) => {
   return {
     userIsLogged: state.login.isLogged,
-    errMessage: state.login.errorMessage,
+    messageLogin: state.login.messageLogin,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogIn: (email, senha) => dispatch(actionTypes.login(email, senha)),
+    onSetMessageLogin: (message) =>
+      dispatch(actionTypes.setMessageLogin(message)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FaleConosco);

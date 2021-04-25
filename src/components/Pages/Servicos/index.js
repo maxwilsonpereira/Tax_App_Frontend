@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import classes from "./Comprar.module.css";
-import Products from "./Products";
+import classes from './styles.module.css';
+import Products from './productAll';
 
 export default function Comprar(props) {
   const productsToShow = [];
@@ -17,7 +17,7 @@ export default function Comprar(props) {
     }
   }
   return (
-    <section className={[classes.CenterAligned, classes.SectionGrey].join(" ")}>
+    <section className={[classes.CenterAligned, classes.SectionGrey].join(' ')}>
       <br />
       <h1 className={classes.SectionTitle}>Declare seu Imposto de Renda</h1>
       <p className={classes.SectionDescription}>

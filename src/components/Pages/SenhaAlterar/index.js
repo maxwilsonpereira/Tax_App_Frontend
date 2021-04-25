@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import * as actionTypes from '../../../store/actions/actionsIndex';
 import classes from './styles.module.scss';
 import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -8,20 +9,8 @@ import serverURL from '../../../serverURL';
 function SenhaAlterar(props) {
   const [senhaAtual, setSenhaAtual] = useState('');
   const [senhaNova, setSenhaNova] = useState('');
-  const [senhaNovaConfirma, setSenhaNovaConfirma] = useState(
-    'Confirmar Senha Nova'
-  );
-  const [messageToUser, setMessageToUser] = useState(null);
+  const [senhaNovaConfirma, setSenhaNovaConfirma] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMessageToUser(null);
-    }, 5000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [messageToUser]);
 
   // if (senhaAtual === "") {
   //   setSehaAtual("Senha Atual");
@@ -37,26 +26,17 @@ function SenhaAlterar(props) {
     // CONFERIR SE SENHA NOVA: COM O BACKEND! Onde colocar? 21/03/2021
     // FRONTEND VALIDATION:
     e.preventDefault();
+    props.onEraseAllMessages();
     if (senhaNova.length < 5 || senhaNovaConfirma.length < 5) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          Mínimo 5 caracteres para senha!
-        </div>
-      );
+      props.onSetMessageLogin('Mínimo 5 caracteres para senha!');
       return;
     }
     if (senhaNova !== senhaNovaConfirma) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          As senhas não são compatíves!
-        </div>
-      );
+      props.onSetMessageLogin('As senhas não são compatíves!');
       return;
     }
     if (senhaNova === senhaAtual) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>As senhas são idénticas!</div>
-      );
+      props.onSetMessageLogin('As senhas são idénticas!');
       return;
     }
     // UPDATING PASSWORD:
@@ -84,37 +64,25 @@ function SenhaAlterar(props) {
           setIsLoading(false);
           return;
         } else if (res.status === 404) {
-          setMessageToUser(
-            <div className={classes.MessageToUser}>Usuário não encontrado!</div>
-          );
+          props.onSetMessageLogin('Usuário não encontrado!');
           setSenhaNova('');
           setSenhaNovaConfirma('');
           setIsLoading(false);
           return;
         } else if (res.status === 403) {
-          setMessageToUser(
-            <div className={classes.MessageToUser}>A senha não confere!</div>
-          );
+          props.onSetMessageLogin('A senha não confere!');
           setSenhaNova('');
           setSenhaNovaConfirma('');
           setIsLoading(false);
           return;
         } else {
-          setMessageToUser(
-            <div className={classes.MessageToUser}>
-              Erro de conexão. Favor entrar em contato.
-            </div>
-          );
+          props.onSetMessageLogin('Erro de conexão. Favor entrar em contato.');
           setIsLoading(false);
           return;
         }
       })
       .catch((err) => {
-        setMessageToUser(
-          <div className={classes.MessageToUser}>
-            Erro de conexão. Favor entrar em contato.
-          </div>
-        );
+        props.onSetMessageLogin('Erro de conexão. Favor entrar em contato.');
         setSenhaAtual('');
         setSenhaNova('');
         setSenhaNovaConfirma('');
@@ -124,10 +92,9 @@ function SenhaAlterar(props) {
 
   return (
     <div className={classes.LoginStyle}>
-      <div className={classes[props.showTitle]}>
-        {/* <h1>Alterar Senha</h1> */}
-        <br />
-      </div>
+      {/* <div className={classes[props.showTitle]}>
+        <h1>Alterar Senha</h1>
+      </div> */}
       <input
         onChange={(e) => setSenhaAtual(e.target.value)}
         type="password"
@@ -151,7 +118,7 @@ function SenhaAlterar(props) {
         type="password"
         required
         placeholder="Confirmar Senha Nova"
-        // value={senhaNovaConfirma}
+        value={senhaNovaConfirma}
         name={senhaNovaConfirma}
       />
       <br />
@@ -161,15 +128,19 @@ function SenhaAlterar(props) {
             <CircularProgress color="inherit" />
           </div>
         ) : (
-          <>
-            <ButtonFunc btnColor="BlueBtn" function={changePassHandler}>
-              ALTERAR
+          <div className={classes.flexBtns}>
+            <ButtonFunc btnColor="BtnGreen" function={changePassHandler}>
+              Alterar
             </ButtonFunc>
-          </>
+            <div className={classes.btnTwo}>
+              <ButtonFunc btnColor="BlueBtn" function={props.cancelar}>
+                Cancelar
+              </ButtonFunc>
+            </div>
+          </div>
         )}
       </div>
-      <br />
-      {messageToUser}
+      <div className={classes.MessageToUser}>{props.messageLogin}</div>
     </div>
   );
 }
@@ -177,7 +148,16 @@ function SenhaAlterar(props) {
 const mapStateToProps = (state) => {
   return {
     userId: state.login.userId,
+    messageLogin: state.login.messageLogin,
   };
 };
 
-export default connect(mapStateToProps)(SenhaAlterar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSetMessageLogin: (message) =>
+      dispatch(actionTypes.setMessageLogin(message)),
+    onEraseAllMessages: (message) =>
+      dispatch(actionTypes.eraseAllMessages(message)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SenhaAlterar);

@@ -1,0 +1,13 @@
+// VARIABLES:
+@import './variables.module.scss';
+
+@mixin errorMessage {
+  text-align: left;
+  margin-top: 12px !important;
+  border-radius: 10px;
+  font-size: 1.3em;
+  // background-color: #8f2c31;
+  // box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  // color: $redLight;
+  color: black;
+}

@@ -1,5 +1,7 @@
 // VARIABLES:
 @import '../../../styles/variables.module.scss';
+// MIXINS:
+@import '../../../styles/mixins.module.scss';
 
 .AppContainer {
   max-width: 1000px;
@@ -39,15 +41,18 @@
   margin-right: 10px;
   transform: translateY(25%);
 }
-.SubmitBtn {
-  text-align: right;
-  height: 30px;
+.btnsContainer {
+  display: flex;
+  justify-content: space-between;
 }
-.SubmitBtn button {
-  margin-left: 10px;
+.btnOne {
+  width: 64%;
+}
+.btnTwo {
+  width: 34%;
 }
 .MarginLeft10 {
-  margin-left: 10px;
+  margin-left: 10px !important;
 }
 .noTitle {
   display: none;
@@ -58,7 +63,7 @@
 .CadastroStyle input,
 textarea {
   width: 100%;
-  margin: 15px 0;
+  margin: 8px 0;
   border-radius: 5px;
   padding: 15px 10px;
   font-size: 1.2em;
@@ -87,18 +92,11 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: rgb(232, 240, 254) !important;
 }
 .ErrorMessage {
-  text-align: center;
-  border-radius: 10px;
-  font-size: 1.5em;
-  padding: 10px !important;
-  // background-color: #8f2c31;
-  // box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-  color: $redLight;
+  @include errorMessage;
 }
 .progressCircle {
   text-align: center;
 }
-
 /* NEXT TO HIDE password inputs from form when user is logged: */
 .DontShow {
   display: none;

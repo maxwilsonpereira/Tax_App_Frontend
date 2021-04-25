@@ -1,36 +1,59 @@
 .ButtonBuy {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   color: white;
-  padding: 8px 22px;
+  padding: 10px 40px;
   font-size: 1.4em;
   border-radius: 10px;
-  background-color: #e8ba3c;
+  /* background-color: #e8ba3c; */
   box-sizing: border-box;
   outline: 0;
   border: none;
-  border-bottom: 2px solid #9b7c26;
+  /* border-bottom: 2px solid #9b7c26; */
   transition: 0.2s;
+  /* NEW: */
+  background-color: transparent;
+  border: 2px solid #e8ba3c;
 }
 .ButtonBuy:hover {
-  color: #e8ba3c;
-  background-color: white;
+  /* color: #e8ba3c;
+  background-color: white; */
   /* transform: translateY(-2%); */
-  box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
-  -webkit-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
-  -moz-box-shadow: 0px 10px 21px -17px rgba(0, 0, 0, 0.72);
+  box-shadow: 5px 15px 21px -17px rgba(0, 0, 0, 0.72);
+  -webkit-box-shadow: 5px 15px 21px -17px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 5px 15px 21px -17px rgba(0, 0, 0, 0.72);
+  /* NEW: */
+  /* color: #e8ba3c; */
+  /* text-shadow: 1px 1px rgba(0, 0, 0, 0.72); */
 }
 .BlueBtn {
-  background-color: #0155a0;
-  color: white;
-  height: 43px;
-  border: 1px solid #0155a0;
-  border-bottom: 2px solid #023058;
-}
-.BlueBtn:hover {
-  background-color: white;
+  /* background-color: #0155a0; */
   color: #0155a0;
-  /* border: 1px solid #023058; */
+  height: 43px;
+  /* border: 1px solid #0155a0;
+  border-bottom: 2px solid #023058; */
+  /* NEW: */
+  background-color: transparent;
+  border: 2px solid #0155a0;
 }
-
+.BtnGreen {
+  /* background-color: #0155a0; */
+  color: #1e8658;
+  height: 43px;
+  /* border: 1px solid #0155a0;
+    border-bottom: 2px solid #023058; */
+  /* NEW: */
+  background-color: transparent;
+  border: 2px solid #1e8658;
+}
+.BtnGreenPagar {
+  color: #1e8658;
+  height: 60px;
+  background-color: transparent;
+  border: 2px solid #1e8658;
+}
 .OrangeBtn {
   background-color: #e8ba3c;
   color: white;
@@ -82,6 +105,7 @@
   color: #444444;
   color: #fb5f2e; /* DISCOUNT */
   background-color: #31ae75;
+  background-color: #1e8658;
   color: #e8ba3c;
   background-color: #145a83; /* Comprar Declaração Box */
   background-color: #033959; /* FOOTER */

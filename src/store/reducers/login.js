@@ -7,7 +7,9 @@ const initialState = {
   username: localStorage.getItem('username'),
   userEmail: localStorage.getItem('userEmail'),
   userPhone: localStorage.getItem('userPhone'),
-  errorMessage: '',
+  messageLogin: '',
+  messageAreaCliente: '',
+  messageCadastro: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,39 +32,68 @@ const reducer = (state = initialState, action) => {
           userEmail: action.email,
           userPhone: action.telephone,
           token: action.token,
-          errorMessage: 'Logado',
+          messageLogin: '',
+          messageAreaCliente: '',
+          messageCadastro: '',
         };
       } else {
         return {
           ...state,
           isLogged: false,
-          errorMessage: action.errMessage,
+          messageLogin: action.message,
+          messageAreaCliente: '',
+          messageCadastro: '',
         };
       }
     case actionTypes.UPDATE:
       localStorage.setItem('username', action.name);
-      localStorage.setItem('username', action.email);
+      localStorage.setItem('userEmail', action.email);
       localStorage.setItem('userPhone', action.telephone);
       return {
         ...state,
         username: action.name,
         userEmail: action.email,
         userPhone: action.telephone,
+        messageAreaCliente: '',
+        messageLogin: '',
+        messageCadastro: 'Informações atualizadas!',
       };
     case actionTypes.LOGOUT:
       localStorage.clear();
       return {
         ...state,
         isLogged: 'false',
-        errorMessage: '',
         username: '',
         userEmail: '',
         userPhone: '',
       };
-    case actionTypes.ERR_MESSAGE_ERASER:
+    case actionTypes.SET_MESSAGE_LOGIN:
       return {
         ...state,
-        errorMessage: '',
+        messageAreaCliente: '',
+        messageCadastro: '',
+        messageLogin: action.message,
+      };
+    case actionTypes.SET_MESSAGE_AREA_CLIENTE:
+      return {
+        ...state,
+        messageCadastro: '',
+        messageLogin: '',
+        messageAreaCliente: action.message,
+      };
+    case actionTypes.SET_MESSAGE_CADASTRO:
+      return {
+        ...state,
+        messageAreaCliente: '',
+        messageLogin: '',
+        messageCadastro: action.message,
+      };
+    case actionTypes.ERASE_ALL_MESSAGES:
+      return {
+        ...state,
+        messageAreaCliente: '',
+        messageLogin: '',
+        messageCadastro: '',
       };
     default:
       return state;

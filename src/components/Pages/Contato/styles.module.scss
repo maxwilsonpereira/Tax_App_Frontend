@@ -1,14 +1,17 @@
+// MIXINS
+@import '../../../styles/mixins.module.scss';
+
 .AppContainer {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
 .SectionBlueDark {
-  background-color: #145a83;
+  background-color: #145a83 !important;
 }
-.CenterAligned {
-  text-align: center;
-}
+// .CenterAligned {
+//   text-align: center;
+// }
 .Flexbox {
   display: flex;
   flex-wrap: wrap;
@@ -17,7 +20,7 @@
 }
 .Flexbox div {
   flex: 1 1 400px; /* 320px min, than wrap! */
-  margin: 0px 20px;
+  // margin: 0px 20px;
   box-sizing: border-box;
 }
 .flexboxFirstDiv {
@@ -48,12 +51,14 @@
   transform: translateY(25%);
 }
 .SubmitBtn {
-  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 .Flexbox input,
 textarea {
   width: 100%;
-  margin: 15px 0;
+  margin: 10px 0;
   border-radius: 5px;
   padding: 15px 10px;
   font-size: 1.2em;
@@ -85,14 +90,14 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: rgb(232, 240, 254) !important;
 }
 .MessageToUser {
-  text-align: center;
-  // border-radius: 10px;
-  margin: 10px 0 !important;
-  font-size: 1.5em;
-  padding: 10px !important;
-  // background-color: #e8ba3c;
-  // box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-  color: #033959;
+  @include errorMessage;
+  color: white;
+}
+.whiteFont {
+  color: white;
+}
+.blueFont {
+  color: #000000 !important;
 }
 .progressCircle {
   text-align: center;

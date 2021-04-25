@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import Compra from "./Compra.js";
+import ProductOne from './productOne.js';
 
 const parcelasNum = 4;
 const totalProducts = 9;
 
-const Products = [
-  <Compra
+const ProductAll = [
+  <ProductOne
     key={1}
     id={1}
     highlight={true}
@@ -30,7 +30,7 @@ const Products = [
     descriptionMainB="Esse serviço de declaração de imposto de renda, ainda permite que você declare itens de patrimônio, tais como imóveis, veículos automotores, saldos bancários e dívidas bancárias. No caso dos saldos bancários, nós  recomendamos aos nossos clientes que sempre encaminhem essa informação para a Receita Federal, para que ela possa ter em suas bases de dados toda a sua evolução patrimonial. Esse é um item, em nossa opinião, importante, pois a cada período de tempo a Receita Federal evolui seus controles e cruzamentos de informações."
     descriptionMainC="Esse serviço também contempla todo suporte caso o cliente caia na malha fina, ou seja, nós daremos as orientações necessárias de quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda. Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós temos esse serviço disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={2}
     id={2}
     highlight={true}
@@ -54,7 +54,7 @@ const Products = [
     descriptionMainB="Esse serviço de declaração de imposto de renda, ainda permite que você declare itens de patrimônio, tais como imóveis, veículos automotores, saldos bancários e dívidas bancárias. No caso dos saldos bancários, nós  recomendamos aos nossos clientes que sempre encaminhem essa informação para a Receita Federal, para que ela possa ter em suas bases de dados toda a sua evolução patrimonial. Esse é um item, em nossa opinião, importante, pois a cada período de tempo a Receita Federal evolui seus controles e cruzamentos de informações."
     descriptionMainC="Esse serviço também contempla todo suporte caso o cliente caia na malha fina, ou seja, nós daremos as orientações necessárias de quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda. Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós temos esse serviço disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={3}
     id={3}
     highlight={true}
@@ -65,7 +65,7 @@ const Products = [
     descriptionB="Apenas 2 Fontes de Renda"
     descriptionC="Suporte para Malha Fina"
     descriptionD="Imposto entregue de forma correta"
-    discount={15.9}
+    discount={15}
     oldPrice={189}
     // price={(oldPrice * ((100 - discount) * 0.01)).toFixed(2)}
     price={(189 * ((100 - 15.9) * 0.01)).toFixed(2)}
@@ -78,7 +78,7 @@ const Products = [
     descriptionMainB="Esse serviço de declaração de imposto de renda, ainda permite que você declare itens de patrimônio, tais como imóveis, veículos automotores, saldos bancários e dívidas bancárias. No caso dos saldos bancários, nós  recomendamos aos nossos clientes que sempre encaminhem essa informação para a Receita Federal, para que ela possa ter em suas bases de dados toda a sua evolução patrimonial. Esse é um item, em nossa opinião, importante, pois a cada período de tempo a Receita Federal evolui seus controles e cruzamentos de informações."
     descriptionMainC="Esse serviço também contempla todo suporte caso o cliente caia na malha fina, ou seja, nós daremos as orientações necessárias de quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda. Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós temos esse serviço disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={4}
     id={4}
     highlight={true}
@@ -89,7 +89,7 @@ const Products = [
     descriptionB="1 Fonte + Declaração PJ MEI"
     descriptionC="Suporte para Malha Fina"
     descriptionD="Imposto entregue de forma correta"
-    discount={10.7}
+    discount={10}
     oldPrice={140}
     // price={(oldPrice * ((100 - discount) * 0.01)).toFixed(2)}
     price={(140 * ((100 - 10.7) * 0.01)).toFixed(2)}
@@ -102,7 +102,7 @@ const Products = [
     descriptionMainB="Esse serviço de declaração de imposto de renda, ainda permite que você declare itens de patrimônio, tais como imóveis, veículos automotores, saldos bancários e dívidas bancárias. No caso dos saldos bancários, nós  recomendamos aos nossos clientes que sempre encaminhem essa informação para a Receita Federal, para que ela possa ter em suas bases de dados toda a sua evolução patrimonial. Esse é um item, em nossa opinião, importante, pois a cada período de tempo a Receita Federal evolui seus controles e cruzamentos de informações."
     descriptionMainC="Esse serviço também contempla todo suporte caso o cliente caia na malha fina, ou seja, nós daremos as orientações necessárias de quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda. Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós temos esse serviço disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={5}
     id={5}
     highlight={false}
@@ -126,7 +126,7 @@ const Products = [
     descriptionMainB="Esse serviço de declaração de imposto de renda, ainda permite que você declare itens de patrimônio, tais como imóveis, veículos automotores, saldos bancários e dívidas bancárias. No caso dos saldos bancários, nós  recomendamos aos nossos clientes que sempre encaminhem essa informação para a Receita Federal, para que ela possa ter em suas bases de dados toda a sua evolução patrimonial. Esse é um item, em nossa opinião, importante, pois a cada período de tempo a Receita Federal evolui seus controles e cruzamentos de informações."
     descriptionMainC="Esse serviço também contempla todo suporte caso o cliente caia na malha fina, ou seja, nós daremos as orientações necessárias de quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda. Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós temos esse serviço disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={6}
     id={6}
     highlight={false}
@@ -152,7 +152,7 @@ const Products = [
     descriptionMainD="Se um desses casos é o seu, fique à vontade para comprar online o produto e posteriormente nos encaminhar toda a documentação, para que possamos preencher de maneira adequada, a Declaração de Espólio (Parcial ou Final) e dentro do prazo estipulado pela Receita Federal, nós também fazermos a Declaração dos Herdeiros."
     descriptionMainE="Nesse valor não estão incluídos os valores referentes as Declarações dos Herdeiros. Se o seu Espólio tiver mais de 3 pessoas, entre em contato conosco para que possamos fazer um valor mais adequado e assim atendermos a todos."
   />,
-  <Compra
+  <ProductOne
     key={7}
     id={7}
     highlight={false}
@@ -179,7 +179,7 @@ const Products = [
     descriptionMainE="Esse trabalho contempla ainda todo suporte necessário caso o cliente caia na malha fina, ou seja, nós daremos as orientações para envio de Declarações retificadoras, se for o caso, e quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda, online ou presencialmente."
     descriptionMainF="Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós também poderemos prestar esse serviço, o mesmo está disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={8}
     id={8}
     highlight={false}
@@ -206,7 +206,7 @@ const Products = [
     descriptionMainE="Esse trabalho contempla ainda todo suporte necessário caso o cliente caia na malha fina, ou seja, nós daremos as orientações para envio de Declarações retificadoras, se for o caso, e quais as documentações necessárias que o cliente deverá apresentar ao fiscal do imposto de renda, online ou presencialmente."
     descriptionMainF="Além disso, se o cliente estiver com as declarações dos anos anteriores pendentes de envio, nós também poderemos prestar esse serviço, o mesmo está disponível para contratação na área de serviços. Bastando apenas que o cliente se dirija até lá e informe quais os anos que estão em atraso e adquira o produto."
   />,
-  <Compra
+  <ProductOne
     key={9}
     id={9}
     highlight={false}
@@ -232,4 +232,4 @@ const Products = [
     descriptionMainD="A maioria das pessoas, muitas vezes por não saberem, acabam achando que essa Declaração só deverá ser feita junto com a Declaração de Ajuste anual que é informada no ano seguinte entre Março e Abril. Quando na realidade deverá ser declarado no mês subsequente a alienação (ou venda) do BEM."
   />,
 ];
-export default Products;
+export default ProductAll;

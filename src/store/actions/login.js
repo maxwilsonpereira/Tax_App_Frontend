@@ -3,17 +3,15 @@ import * as actionTypes from './actionsTypes';
 import serverURL from '../../serverURL';
 
 export const login = (email, password) => async (dispatch) => {
-  dispatch(errorMessageEraser());
+  // Erasing last message:
+  let message = 'Loggin in';
   const body = { email: email, password: password };
-  let message = '';
   let loginSucceed = false;
   console.log('body: ', body);
 
   try {
     const response = await axios.post(`${serverURL}/users/login`, body);
-    console.log('IM HERE TRY: response.data: ', response.data);
     loginSucceed = true;
-    message = 'Loggin in';
     dispatch(
       loginExec(
         loginSucceed,
@@ -64,12 +62,13 @@ export const loginExec = (
       telephone: telephone,
       id: id,
       token: token,
+      message: message,
     };
   } else {
     return {
       type: actionTypes.LOGIN,
       validLogin: false,
-      errMessage: message,
+      message: message,
     };
   }
 };
@@ -89,8 +88,26 @@ export const logout = () => {
   };
 };
 
-export const errorMessageEraser = () => {
+export const setMessageLogin = (message) => {
   return {
-    type: actionTypes.ERR_MESSAGE_ERASER,
+    type: actionTypes.SET_MESSAGE_LOGIN,
+    message: message,
+  };
+};
+export const setMessageAreaCliente = (message) => {
+  return {
+    type: actionTypes.SET_MESSAGE_AREA_CLIENTE,
+    message: message,
+  };
+};
+export const setMessageCadastro = (message) => {
+  return {
+    type: actionTypes.SET_MESSAGE_CADASTRO,
+    message: message,
+  };
+};
+export const eraseAllMessages = () => {
+  return {
+    type: actionTypes.ERASE_ALL_MESSAGES,
   };
 };

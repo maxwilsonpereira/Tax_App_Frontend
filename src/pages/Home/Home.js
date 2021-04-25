@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions/actionsIndex";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../store/actions/actionsIndex';
 
-import classes from "./Home.module.css";
-import homeImg from "../../assets/homeImg.jpg";
+import classes from './Home.module.css';
+import homeImg from '../../assets/homeImg.jpg';
 
-import Servicos from "../../components/Pages/Servicos";
-import NumeroDeVendas from "../../components/Pages/NumeroDeVendas";
-import Testimonials from "../../components/Pages/Testimonials";
-import Duvidas from "../../components/Pages/Duvidas";
-import Contato from "../../components/Pages/Contato";
-import GoogleMap from "../../components/Pages/GoogleMap/GoogleMap";
-import QualSeuCaso from "../../components/Pages/QualSeuCaso";
-import ComoFunciona from "../../components/Pages/ComoFunciona";
+import Servicos from '../../components/Pages/Servicos';
+import NumeroDeVendas from '../../components/Pages/NumeroDeVendas';
+import Testimonials from '../../components/Pages/Testimonials';
+import Duvidas from '../../components/Pages/Duvidas';
+import Contato from '../../components/Pages/Contato';
+import GoogleMap from '../../components/Pages/GoogleMap/GoogleMap';
+import QualSeuCaso from '../../components/Pages/QualSeuCaso';
+import ComoFunciona from '../../components/Pages/ComoFunciona';
 
 function Home(props) {
   useEffect(() => {
@@ -25,7 +25,7 @@ function Home(props) {
   return (
     <div>
       {/* ANCHOR self-closing DIV: */}
-      <div id="start" style={{ position: "absolute", top: "0px" }} />
+      <div id="start" style={{ position: 'absolute', top: '0px' }} />
       {/* HOME IMAGE */}
       <section className={classes.HomeImageContainer} style={backHomeImgStyle}>
         <div className={classes.SectionDescription}>
@@ -55,8 +55,9 @@ function Home(props) {
       <Contato
         IconColor="white"
         backColor="SectionBlueDark"
-        btnColor="OrangeBtn"
+        btnColor="ButtonBuy"
         title="Fale Conosco"
+        messageColor="whiteFont"
         description="Entre em contato pelo nosso telefone, e-mail ou preencha o
             formulário e fale com um dos nossos especialistas."
       />

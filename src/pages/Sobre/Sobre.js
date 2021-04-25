@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import * as actionTypes from "../../store/actions/actionsIndex";
+import * as actionTypes from '../../store/actions/actionsIndex';
 
-import classes from "./Sobre.module.css";
-import PageTitle from "../../components/Pages/PageTitle/PageTitle";
-import img from "../../assets/sobre.png";
+import classes from './Sobre.module.css';
+import PageTitle from '../../components/Pages/PageTitle/PageTitle';
+import img from '../../assets/sobre.png';
 
-import Servicos from "../../components/Pages/Servicos";
-import FaleConosco from "../../components/Pages/Contato";
-import GoogleMap from "../../components/Pages/GoogleMap/GoogleMap";
+import Servicos from '../../components/Pages/Servicos';
+import FaleConosco from '../../components/Pages/Contato';
+import GoogleMap from '../../components/Pages/GoogleMap/GoogleMap';
 
 function Sobre(props) {
   useEffect(() => {
@@ -18,7 +18,7 @@ function Sobre(props) {
 
   return (
     <>
-      <div id="start" style={{ position: "absolute", top: "0px" }} />
+      <div id="start" style={{ position: 'absolute', top: '0px' }} />
       <section className={classes.CenterAligned}>
         <PageTitle title="Sobre" />
         <br />
@@ -36,7 +36,7 @@ function Sobre(props) {
             gasto para preparar a declaração é precioso e achamos que você
             deveria usá-lo com as pessoas que você gostaria de estar. Em
             primeiro lugar, somos profissionais, especialistas em imposto de
-            renda, e com várias formações. Somos{" "}
+            renda, e com várias formações. Somos{' '}
             <b>administradores, advogados, contadores, economistas</b>
             entre outras formações na área de exatas. Agora a pergunta de
             R$1.000.000, por que fazemos imposto de renda? Fazemos por vários
@@ -58,7 +58,7 @@ function Sobre(props) {
       {/* FALE CONOSCO */}
       <FaleConosco
         IconColor="white"
-        backCollor="SectionBlueDark"
+        backColor="SectionBlueDark"
         title="Fale Conosco"
         description="Entre em contato pelo nosso telefone, e-mail ou preencha o
             formulário e fale com um dos nossos especialistas."

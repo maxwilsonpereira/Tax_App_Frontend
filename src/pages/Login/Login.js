@@ -9,146 +9,64 @@ import PageTitle from '../../components/Pages/PageTitle/PageTitle';
 import Contato from '../../components/Pages/Contato';
 import Duvidas from '../../components/Pages/Duvidas';
 import LoginComponent from '../../components/Pages/Login/Login';
-import RegisterUpdate from '../../components/Pages/Cadastro/registerUpdate';
+import Register from '../../components/Pages/Cadastro/register';
 import UserData from '../../components/Pages/Cadastro/userData';
 import GoogleMap from '../../components/Pages/GoogleMap/GoogleMap';
 import BtnAreaCliente from '../../components/UI/Buttons/BtnAreaCliente';
 import SenhaAlterar from '../../components/Pages/SenhaAlterar';
-// import BtnFunction from "../../components/UI/Buttons/ButtonFunc";
 
 function Login(props) {
-  const [userLoggedShow, setUserLoggedShow] = useState(null);
   const [alterarSenhaShow, setAlterarSenhaShow] = useState(null);
   const [alterarInfosToggle, setAlterarInfosToggle] = useState(false);
-
-  const currentUsername = localStorage.getItem('currentUsername');
-  const [messageToUser, setMessageToUser] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState(
+    localStorage.getItem('username')
+  );
 
   useEffect(() => {
+    setCurrentUsername(props.username);
+  }, [props.username]);
+
+  useEffect(() => {
+    props.onSetMessageAreaCliente('');
+    setCurrentUsername(props.username);
     props.onHideSideDrawer();
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMessageToUser(null);
-    }, 4000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [messageToUser]);
-
-  useEffect(() => {
-    // userLogged beggins with FALSE!
-    if (props.userIsLogged === 'true') {
-      // USER IS LOGGED:
-      setUserLoggedShow(
-        <div className={classes.AppContainerLogin}>
-          <div className={classes.GridAreaCliente}>
-            <div className={classes.TitleAreaCliente}>
-              <h1>Área do Cliente</h1>
-              <br />
-              <h2>Olá {currentUsername}</h2>
-              <br />
-              <br />
-              <BtnAreaCliente BtnColor="RedBtn" function={alterarSenhaHandler}>
-                Alterar Senha
-              </BtnAreaCliente>
-              <br />
-              <br />
-              <BtnAreaCliente BtnColor="GreenBtn" function={declaracoesHandler}>
-                Declarações
-              </BtnAreaCliente>
-              <br /> <br />
-              {messageToUser}
-              <br />
-              {alterarSenhaShow}
-              <br />
-            </div>
-            <div>
-              {alterarInfosToggle ? (
-                <>
-                  <RegisterUpdate
-                    title="Meus Dados"
-                    dontShowPasswordInputs="DontShow"
-                    alterarInfosToggleFunc={alterarInfosToggleFunc}
-                  >
-                    Confirmar
-                  </RegisterUpdate>
-                </>
-              ) : (
-                <UserData
-                  title="Meus Dados"
-                  function={alterarInfosToggle}
-                  alterarInfosToggleFunc={alterarInfosToggleFunc}
-                >
-                  Alterar Informações
-                </UserData>
-              )}
-            </div>
-          </div>
-        </div>
-      );
-    } else {
-      setUserLoggedShow(
-        <div className={classes.AppContainerLogin}>
-          <div className={classes.Flexbox}>
-            <div>
-              {/* LOGIN COMPONENT */}
-              <LoginComponent
-                btnColor="BlueBtn"
-                function={userLoggedInHandler}
-              />
-            </div>
-            <div>
-              <RegisterUpdate dontShowCancelBtn="DontShow" title="Cadastro">
-                CADASTRAR
-              </RegisterUpdate>
-            </div>
-          </div>
-        </div>
-      );
-    }
-  }, [
-    alterarSenhaShow,
-    props.userIsLogged,
-    props.userName,
-    props.userEmail,
-    props.userTelephone,
-    messageToUser,
-    alterarInfosToggle,
-  ]);
-
   function alterarInfosToggleFunc(e) {
+    props.onEraseAllMessages();
     // e.preventDefault();
     setAlterarInfosToggle(!alterarInfosToggle);
   }
 
   function alterarSenhaHandler(e) {
     e.preventDefault();
+    props.onSetMessageAreaCliente('');
     if (alterarSenhaShow === null) {
-      setAlterarSenhaShow(<SenhaAlterar newPassSuccess={newPassSuccess} />);
+      setAlterarSenhaShow(
+        <SenhaAlterar
+          newPassSuccess={newPassSuccess}
+          cancelar={cancelarHandler}
+        />
+      );
     } else {
       setAlterarSenhaShow(null);
     }
   }
+  function cancelarHandler() {
+    props.onSetMessageAreaCliente('');
+    setAlterarSenhaShow(null);
+  }
 
   function newPassSuccess(e) {
     // e.preventDefault();
-    // alert("HERE");
     setAlterarSenhaShow(null);
-    setMessageToUser(
-      <div className={classes.MessageToUser}>Senha alterada com sucesso!</div>
-    );
+    props.onSetMessageAreaCliente('Senha alterada com sucesso!');
   }
 
   function declaracoesHandler(e) {
     e.preventDefault();
     setAlterarSenhaShow(null);
-    setMessageToUser(
-      <div className={classes.MessageToUser}>
-        Nenhuma declaração disponível.
-      </div>
-    );
+    props.onSetMessageAreaCliente('Nenhuma declaração disponível.');
   }
   function userLoggedInHandler(e) {
     // e.preventDefault();
@@ -161,7 +79,79 @@ function Login(props) {
       <section className={classes.CenterAligned}>
         <PageTitle title="Login" />
       </section>
-      {userLoggedShow}
+      {props.userIsLogged === 'true' ? (
+        <>
+          <div className={classes.AppContainerLogin}>
+            <div className={classes.GridAreaCliente}>
+              <div className={classes.TitleAreaCliente}>
+                <h1>Área do Cliente</h1>
+                <br />
+                <h2>Olá {currentUsername}</h2>
+                <br />
+                <br />
+                <BtnAreaCliente
+                  BtnColor="RedBtn"
+                  function={alterarSenhaHandler}
+                >
+                  Alterar Senha
+                </BtnAreaCliente>
+                <br />
+                <br />
+                <BtnAreaCliente
+                  BtnColor="GreenBtn"
+                  function={declaracoesHandler}
+                >
+                  Declarações
+                </BtnAreaCliente>
+                <br /> <br />
+                <div className={classes.MessageToUser}>
+                  {props.messageAreaCliente}
+                </div>
+                {alterarSenhaShow}
+                <br />
+              </div>
+              <div>
+                {alterarInfosToggle ? (
+                  <>
+                    <Register
+                      title="Meus Dados"
+                      dontShowPasswordInputs="DontShow"
+                      alterarInfosToggleFunc={alterarInfosToggleFunc}
+                    >
+                      Confirmar
+                    </Register>
+                  </>
+                ) : (
+                  <UserData
+                    title="Meus Dados"
+                    function={alterarInfosToggle}
+                    alterarInfosToggleFunc={alterarInfosToggleFunc}
+                  >
+                    Alterar Informações
+                  </UserData>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={classes.AppContainerLogin}>
+            <div className={classes.Flexbox}>
+              <div>
+                {/* LOGIN COMPONENT */}
+                <LoginComponent
+                  btnColor="BlueBtn"
+                  function={userLoggedInHandler}
+                />
+              </div>
+              <Register dontShowCancelBtn="DontShow" title="Cadastro">
+                Cadastrar
+              </Register>
+            </div>
+          </div>
+        </>
+      )}
       <br />
       <br />
       {/* DÚVIDAS FREQUENTES */}
@@ -172,7 +162,7 @@ function Login(props) {
           IconColor="white"
           title="Fale Conosco"
           backColor="SectionBlueDark"
-          btnColor="OrangeBtn"
+          btnColor="ButtonBuy"
           description="Entre em contato pelo nosso telefone, e-mail ou preencha o
             formulário e fale com um dos nossos especialistas."
         />
@@ -186,9 +176,10 @@ function Login(props) {
 const mapStateToProps = (state) => {
   return {
     userIsLogged: state.login.isLogged,
-    userName: state.login.nameCurrentUser,
-    userEmail: state.login.emailCurrentUser,
-    userTelephone: state.login.phoneCurrentUser,
+    username: state.login.username,
+    userEmail: state.login.userEmail,
+    userTelephone: state.login.userPhone,
+    messageAreaCliente: state.login.messageAreaCliente,
   };
 };
 
@@ -196,6 +187,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onLogIn: (email) => dispatch(actionTypes.login(email)),
     onHideSideDrawer: () => dispatch(actionTypes.hideSideDrawer()),
+    onSetMessageAreaCliente: (message) =>
+      dispatch(actionTypes.setMessageAreaCliente(message)),
+    onEraseAllMessages: () => dispatch(actionTypes.eraseAllMessages()),
   };
 };
 

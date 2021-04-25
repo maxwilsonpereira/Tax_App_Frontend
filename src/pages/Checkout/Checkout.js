@@ -7,11 +7,11 @@ import * as actionTypes from '../../store/actions/actionsIndex';
 import iconImg from '../../assets/checkoutIcon.png';
 import ButtonFunc from '../../components/UI/Buttons/ButtonFunc';
 import Selector from '../../components/UI/Selector/Selector';
-import classes from './Checkout.module.css';
+import classes from './styles.module.scss';
 import PageTitle from '../../components/Pages/PageTitle/PageTitle';
-import Products from '../../components/Pages/Servicos/Products';
+import Products from '../../components/Pages/Servicos/productAll';
 import Login from '../../components/Pages/Login/Login';
-import RegisterUpdate from '../../components/Pages/Cadastro/registerUpdate';
+import Register from '../../components/Pages/Cadastro/register';
 import CartaoCredito from '../../components/Pages/CartaoCredito';
 
 function Sobre(props) {
@@ -28,8 +28,8 @@ function Sobre(props) {
 
   const [productId, setProductId] = useState(0);
 
-  const currentUsername = localStorage.getItem('currentUsername');
-  const currentUserEmail = localStorage.getItem('currentUserEmail');
+  const currentUsername = localStorage.getItem('username');
+  const currentUserEmail = localStorage.getItem('userEmail');
 
   const auxProdId = localStorage.getItem('currentProduct') - 1;
 
@@ -56,83 +56,67 @@ function Sobre(props) {
     // }
 
     if (props.userIsLogged === 'true') {
-      // setBtnFinalizarCompra(
-      //   <ButtonFunc
-      //     className={classes.BtnFinalizar}
-      //     btnColor="GreenOrangeBtn"
-      //     function={finalizarCompraHandler}
-      //   >
-      //     Finalizar Pedido
-      //   </ButtonFunc>
-      // );
       setLoggedInOrNot(
         <>
           <div className={classes.CenterAligned}>
             <div className={classes.UsuarioDadosStyle}>
-              <div className={classes.ContainerA}>
-                <h3>Usuário Logado</h3>
-                <p>{currentUsername}</p>
-                <p>{currentUserEmail}</p>
-              </div>
-              <br />
-              <div className={classes.ContainerB}>
-                <h2>Resumo da Compra</h2> <br />
-                <div className={classes.LeftAlignment}>
-                  <img
-                    className={classes.ImgResumoCompra}
-                    src={iconImg}
-                    alt=""
-                  />
+              <h2>Resumo da Compra</h2> <br />
+              <div className={classes.LeftAlignment}>
+                <img className={classes.ImgResumoCompra} src={iconImg} alt="" />
 
-                  <h2
-                    className={[classes.FontBlue, classes.InlineBlock].join(
-                      ' '
-                    )}
-                  >
-                    {Products[productId].props.title}
-                    <br />
-                    {Products[productId].props.subTitle}
-                  </h2>
-                </div>
+                <h2
+                  className={[classes.FontBlue, classes.InlineBlock].join(' ')}
+                >
+                  {Products[productId].props.title}
+                  <br />
+                  {Products[productId].props.subTitle}
+                </h2>
               </div>
               <br />
-              <div className={classes.ContainerC}>
-                <h3>
-                  Valor da Compra:
+              <h3>
+                Usuário
+                <br />
+                <span className={classes.fontBlue}>
+                  {currentUsername}
                   <br />
+                  {currentUserEmail}
+                </span>
+                <br />
+                <br />
+                Valor da Compra:
+                <br />
+                <span className={classes.fontBlue}>
                   R$ {Products[productId].props.price}
-                </h3>
-              </div>
+                </span>
+              </h3>
               <br className={classes.MobileOnly} />
             </div>
           </div>
           <br className={classes.MobileOnly} />
           {/* FORMA DE PAGAMENTO */}
           <div className={classes.CenterAligned}>
-            <div className={classes.ContainerD}>
-              {/* <br className={classes.MobileOnly} /> */}
-              <h2>FORMA DE PAGAMENTO</h2>
-              <br />
-              <Selector
-                btnColor={selectorBoletoColor}
-                function={boletoBancarioHandler}
-              >
-                Boleto Bancario
-              </Selector>
-              <br />
-              <br />
-              <Selector
-                btnColor={selectorCartaoColor}
-                function={cartaoDeCreditoHandler}
-              >
-                Cartão de Crédito
-              </Selector>
-              <br />
-              <br />
-              {cartaoCreditoComponent}
-              <br />
-              {btnFinalizarCompra}
-            </div>
+            {/* <br className={classes.MobileOnly} /> */}
+            <h2>Forma de Pagamento</h2>
+            <br />
+            <Selector
+              btnColor={selectorBoletoColor}
+              function={boletoBancarioHandler}
+            >
+              Boleto Bancário
+            </Selector>
+            <br />
+            <br />
+            <Selector
+              btnColor={selectorCartaoColor}
+              function={cartaoDeCreditoHandler}
+            >
+              Cartão de Crédito
+            </Selector>
+            <br />
+            <br />
+            {cartaoCreditoComponent}
+            <br />
+            {btnFinalizarCompra}
             <br />
             <br />
           </div>
@@ -150,34 +134,24 @@ function Sobre(props) {
           <div className={classes.CenterAligned}>
             {/* <div className={classes.CenterAligned}> */}
             <div className={classes.UsuarioDadosStyle}>
-              <div className={classes.ContainerB}>
-                <h2>Resumo da Compra</h2> <br />
-                <div className={classes.LeftAlignment}>
-                  <img
-                    className={classes.ImgResumoCompra}
-                    src={iconImg}
-                    alt=""
-                  />
+              <h2>Resumo da Compra</h2> <br />
+              <div className={classes.LeftAlignment}>
+                <img className={classes.ImgResumoCompra} src={iconImg} alt="" />
 
-                  <h2
-                    className={[classes.FontBlue, classes.InlineBlock].join(
-                      ' '
-                    )}
-                  >
-                    {Products[productId].props.title}
-                    <br />
-                    {Products[productId].props.subTitle}
-                  </h2>
-                </div>
+                <h2
+                  className={[classes.FontBlue, classes.InlineBlock].join(' ')}
+                >
+                  {Products[productId].props.title}
+                  <br />
+                  {Products[productId].props.subTitle}
+                </h2>
               </div>
               <br />
-              <div className={classes.ContainerC}>
-                <h3>
-                  Valor da Compra:
-                  <br />
-                  R$ {Products[productId].props.price}
-                </h3>
-              </div>
+              <h3>
+                Valor da Compra:
+                <br />
+                R$ {Products[productId].props.price}
+              </h3>
               <br className={classes.MobileOnly} />
             </div>
             {/* </div> */}
@@ -185,26 +159,19 @@ function Sobre(props) {
           <br className={classes.MobileOnly} />
           <br className={classes.MobileOnly} />
           <div className={classes.CenterAligned}>
-            <div className={classes.ContainerD}>
-              <h2>Já é cadastrado?</h2> <br />
-              <ButtonFunc btnColor="BlueOppositeBtn" function={loginHandler}>
-                Log In
-              </ButtonFunc>
-              <br />
-              <br />
-              {logInComponent}
-              <br />
-              <h2>Não tem cadastro?</h2> <br />
-              <ButtonFunc
-                btnColor="BlueOppositeBtn"
-                function={cadastroNovoHandler}
-              >
-                Cadastro
-              </ButtonFunc>
-              <br />
-              <br />
-              {cadastroComponent}
-            </div>
+            <h2>Já é cadastrado?</h2> <br />
+            <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
+              Log In
+            </ButtonFunc>
+            <br />
+            {logInComponent}
+            <br />
+            <h2>Não tem cadastro?</h2> <br />
+            <ButtonFunc btnColor="BtnGreen" function={cadastroNovoHandler}>
+              Cadastro
+            </ButtonFunc>
+            <br />
+            {cadastroComponent}
             {/* <br /> */}
           </div>
         </>
@@ -242,9 +209,7 @@ function Sobre(props) {
     setLogInComponent(null);
     // TOGGLE CADASTRO:
     if (cadastroComponent === null) {
-      setCadastroComponent(
-        <RegisterUpdate showTitle="noTitle">CADASTRAR</RegisterUpdate>
-      );
+      setCadastroComponent(<Register showTitle="noTitle">Cadastrar</Register>);
     } else {
       setCadastroComponent(null);
     }
@@ -254,10 +219,10 @@ function Sobre(props) {
     setBtnFinalizarCompra(
       <ButtonFunc
         // className={classes.BtnFinalizar}
-        btnColor="GreenOrangeBtn"
+        btnColor="BtnGreenPagar"
         function={finalizarCompraHandler}
       >
-        Finalizar Pedido
+        Confirmar
       </ButtonFunc>
     );
     setCartaoCreditoComponent(null);
@@ -275,7 +240,7 @@ function Sobre(props) {
   }
   function finalizarCompraHandler(e) {
     e.preventDefault(e);
-    alert('FINALIZAR COMPRA');
+    alert('Confirmar');
   }
 
   return (

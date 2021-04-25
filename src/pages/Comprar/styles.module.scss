@@ -1,0 +1,198 @@
+.colorsWebSite {
+  color: #8f2c31;
+  color: #0155a0; /* hover */
+  color: #4d7994; /* Section Title */
+  color: #444444;
+  color: #fb5f2e; /* DISCOUNT */
+  background-color: #31ae75;
+  color: #e8ba3c;
+  background-color: #145a83; /* Comprar Declaração Box */
+  background-color: #033959; /* FOOTER */
+  background-color: #f3f3f3; /* SectionGrey */
+  background-color: #535353; /* SectionGreyDark */
+  background-color: #145a83; /* SectionBlueDark */
+}
+.AppContainer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.CenterAligned {
+  text-align: center;
+}
+.textContainer {
+  padding: 0px 20px 0px 40px;
+}
+.SectionDescriptionPartA {
+  font-size: 1.3em;
+  text-align: center;
+  color: #033959;
+  font-weight: bold;
+}
+.SectionDescriptionPartB {
+  font-size: 1.3em;
+  text-align: center;
+  color: #444444;
+}
+.SectionDescriptionCentered {
+  padding: 10px 60px;
+  font-size: 1.3em;
+  text-align: center;
+  color: #444444;
+}
+.SectionTitle {
+  padding: 30px 10px 10px 10px;
+  font-size: 2.2em;
+  color: #4d7994;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+  @media (max-width: 700px) {
+    font-size: 1.8em;
+  }
+}
+.SectionSutittle {
+  font-size: 1.5em;
+  color: #444444;
+  @media (max-width: 700px) {
+    font-size: 1.2em;
+  }
+}
+.ImgSobre {
+  width: 80%;
+  max-width: 500px;
+}
+.btnComprar {
+  padding: 0px 10px;
+}
+.GridComprar {
+  background-color: #f3f3f3 !important;
+  display: grid;
+  grid-template-columns: 55% 3% 40%;
+  background-color: white;
+  box-sizing: border-box;
+  justify-content: space-around;
+  // column-gap: 20px;
+  padding: 40px 0px;
+  margin: 30px 20px 40px 20px;
+  border-radius: 10px;
+  @media (max-width: 700px) {
+    grid-template-columns: 95%;
+  }
+}
+.GridComprar > div {
+  margin-left: auto;
+  margin-right: auto;
+  color: #444444;
+}
+.PagamentoContainer {
+  // background-color: white;
+  border-radius: 10px;
+  color: white;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  // -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.75);
+  // -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.75);
+  // box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.75);
+  @media (max-width: 700px) {
+    width: 95%;
+  }
+}
+.TarjaComprar {
+  // border-radius: 10px;
+  padding: 20px 10px;
+  font-weight: bold;
+  color: #8f2c31;
+  width: 100%;
+  // background-color: #8f2c31;
+  border-top: 2px solid #8f2c31;
+  border-bottom: 2px solid #8f2c31;
+}
+.CompraCondicoes {
+  text-align: center;
+  padding: 20px 5px;
+  color: #535353;
+}
+.CompraCondicoes h3 {
+  font-size: 1.6em;
+  color: #535353;
+}
+.CompraCondicoes h1 {
+  font-size: 2em;
+  color: #fb5f2e;
+}
+.CompraCondicoes h5 {
+  font-size: 1.2em;
+}
+.FontOrange {
+  color: #fb5f2e;
+}
+.LineThrough {
+  text-decoration: line-through;
+  font-weight: 200;
+}
+.Parcelas {
+  font-weight: 300;
+  font-size: 1.2em;
+}
+.SectionBlueDark {
+  background-color: #145a83;
+}
+.FormasDePagamentoContainer {
+  // margin-top: 30px;
+  text-align: center !important;
+}
+.FormasPagamento {
+  width: 70%;
+  padding: 10px;
+  @media (max-width: 900px) {
+    width: 90%;
+  }
+  @media (max-width: 700px) {
+    width: 70%;
+  }
+}
+.MercadoPago {
+  margin: 20px 0;
+  width: 40%;
+  @media (max-width: 900px) {
+    width: 60%;
+  }
+  @media (max-width: 700px) {
+    width: 40%;
+  }
+}
+.verticalLine {
+  border-left: 1px solid #979797;
+  height: 100%;
+  opacity: 0.8;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+.GridComprar p {
+  text-align: justify;
+}
+/* // NOT IN USE: */
+.GridFooter a {
+  color: white;
+  line-height: 1.6em;
+  transition: 0.2s;
+}
+.GridFooter a:hover {
+  color: #fb5f2e;
+}
+@media (max-width: 900px) {
+  .CompraCondicoes {
+    padding: 15px;
+  }
+  .MobileDontShow {
+    display: none;
+  }
+  .Description {
+    color: black !important;
+    font-weight: bold;
+  }
+  .SectionDescriptionMain {
+    padding: 0px 20px 0px 20px;
+  }
+}

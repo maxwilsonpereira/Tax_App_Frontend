@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import classes from "./Selector.module.css";
-import clickSound from "../../../assets/sounds/click.mp3";
+import classes from './Selector.module.css';
+import clickSound from '../../../assets/sounds/click.mp3';
 
 export default function ButtonBuy(props) {
   const playAudioHandler = (event) => {
@@ -14,8 +14,9 @@ export default function ButtonBuy(props) {
   };
   return (
     <button
-      onClick={playAudioHandler}
-      className={[classes.SelectorBlue, classes[props.btnColor]].join(" ")}
+      // onClick={playAudioHandler}
+      onClick={props.function}
+      className={[classes.SelectorBlue, classes[props.btnColor]].join(' ')}
     >
       {props.children}
     </button>

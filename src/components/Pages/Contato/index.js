@@ -14,19 +14,16 @@ export default function Contato(props) {
   const [email, setEmail] = useState('');
   const [telephone, setTelephone] = useState('');
   const [message, setMessage] = useState('');
-  const [messageToUser, setMessageToUser] = useState(null);
+  const [messageToUser, setMessageToUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const isLogged = localStorage.getItem('userIsLogged');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMessageToUser(null);
-    }, 6000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [messageToUser]);
+    // SCROLL TO TOP ON PAGE LOAD:
+    window.scrollTo(0, 0);
+    // window.scrollTo(0, 370)
+  }, []);
 
   useEffect(() => {
     if (isLogged) {
@@ -39,28 +36,11 @@ export default function Contato(props) {
     }
   }, [isLogged]);
 
-  // if (name === "") {
-  //   setName("Nome");
-  // }
-  // if (email === "") {
-  //   setEmail("E-mail");
-  // }
-  // if (telephone === "") {
-  //   setTelephone("Telefone");
-  // }
-  // if (message === "") {
-  //   setMessage("Mensagem");
-  // }
-
   function sendEmailHandler(e) {
     e.preventDefault();
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (!pattern.test(email)) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          Favor preencher todos os campos corretamente.
-        </div>
-      );
+      setMessageToUser(<>Favor preencher todos os campos corretamente.</>);
       return;
     } else if (
       name === 'Nome' ||
@@ -68,32 +48,16 @@ export default function Contato(props) {
       telephone === 'Telefone' ||
       message === 'Mensagem'
     ) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          Favor preencher todos os campos corretamente.
-        </div>
-      );
+      setMessageToUser(<>Favor preencher todos os campos corretamente.</>);
       return;
     } else if (name.length < 3) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          Mínimo 3 caracteres para nome.
-        </div>
-      );
+      setMessageToUser(<>Mínimo 3 caracteres para nome.</>);
       return;
     } else if (telephone.length < 6) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          Mínimo 6 caracteres para telefone.
-        </div>
-      );
+      setMessageToUser(<>Mínimo 6 caracteres para telefone.</>);
       return;
     } else if (message.length < 10) {
-      setMessageToUser(
-        <div className={classes.MessageToUser}>
-          Mínimo 10 caracteres para mensagem.
-        </div>
-      );
+      setMessageToUser(<>Mínimo 10 caracteres para mensagem.</>);
       return;
     } else {
       // SENDING MESSAGE:
@@ -115,11 +79,11 @@ export default function Contato(props) {
         .then((res) => {
           // console.log('RESPONSE: res', res);
           setMessageToUser(
-            <div className={classes.MessageToUser}>
+            <>
               Mensagem enviada com sucesso!
               <br />
               Em breve entraremos em contato.
-            </div>
+            </>
           );
           setName('');
           setEmail('');
@@ -129,11 +93,11 @@ export default function Contato(props) {
         })
         .catch((err) => {
           setMessageToUser(
-            <div className={classes.MessageToUser}>
+            <>
               Serviço indisponível no momento.
               <br />
               Favor tentar mais tarde.
-            </div>
+            </>
           );
           setIsLoading(false);
         });
@@ -149,9 +113,7 @@ export default function Contato(props) {
   }
 
   return (
-    <section
-      className={[classes.CenterAligned, classes[props.backColor]].join(' ')}
-    >
+    <section className={classes[props.backColor]}>
       <br />
       <div className={classes.AppContainer}>
         <div className={classes.Flexbox}>
@@ -235,7 +197,14 @@ export default function Contato(props) {
                 </>
               )}
             </div>
-            {messageToUser}
+            <div
+              className={[
+                classes.MessageToUser,
+                classes[props.messageColor],
+              ].join(' ')}
+            >
+              {messageToUser}
+            </div>
           </div>
         </div>
       </div>

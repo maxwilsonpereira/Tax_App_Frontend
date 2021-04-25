@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import * as actionTypes from "../../store/actions/actionsIndex";
+import * as actionTypes from '../../store/actions/actionsIndex';
 
-import classes from "./Contato.module.css";
-import PageTitle from "../../components/Pages/PageTitle/PageTitle";
+import classes from './Contato.module.css';
+import PageTitle from '../../components/Pages/PageTitle/PageTitle';
 
-import Contato from "../../components/Pages/Contato";
-import GoogleMap from "../../components/Pages/GoogleMap/GoogleMap";
+import Contato from '../../components/Pages/Contato';
+import GoogleMap from '../../components/Pages/GoogleMap/GoogleMap';
 
 function ContatoComponent(props) {
   useEffect(() => {
@@ -16,7 +16,7 @@ function ContatoComponent(props) {
 
   return (
     <>
-      <div id="start" style={{ position: "absolute", top: "0px" }} />
+      <div id="start" style={{ position: 'absolute', top: '0px' }} />
       <section className={classes.CenterAligned}>
         <PageTitle title="Contato" />
       </section>
@@ -26,6 +26,7 @@ function ContatoComponent(props) {
           IconColor="#145a83"
           btnColor="BlueBtn"
           title="Contato"
+          messageColor="blueFont"
           description="Deixe suas informações no formulário, ligue ou mande um e-mail pra gente."
         />
       </div>
