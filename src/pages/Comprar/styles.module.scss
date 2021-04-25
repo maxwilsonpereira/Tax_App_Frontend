@@ -21,7 +21,10 @@
   text-align: center;
 }
 .textContainer {
-  padding: 0px 20px 0px 40px;
+  padding: 0px 30px 0px 30px;
+  @media (max-width: 700px) {
+    padding: 0px 10px 0px 10px;
+  }
 }
 .SectionDescriptionPartA {
   font-size: 1.3em;
@@ -44,7 +47,7 @@
   padding: 30px 10px 10px 10px;
   font-size: 2.2em;
   color: #4d7994;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
   @media (max-width: 700px) {
     font-size: 1.8em;
   }
@@ -61,7 +64,7 @@
   max-width: 500px;
 }
 .btnComprar {
-  padding: 0px 10px;
+  width: 100%;
 }
 .GridComprar {
   background-color: #f3f3f3 !important;
@@ -76,6 +79,7 @@
   border-radius: 10px;
   @media (max-width: 700px) {
     grid-template-columns: 95%;
+    margin: 30px 10px 40px 10px;
   }
 }
 .GridComprar > div {
@@ -106,6 +110,9 @@
   // background-color: #8f2c31;
   border-top: 2px solid #8f2c31;
   border-bottom: 2px solid #8f2c31;
+  @media (max-width: 700px) {
+    margin-top: 30px;
+  }
 }
 .CompraCondicoes {
   text-align: center;

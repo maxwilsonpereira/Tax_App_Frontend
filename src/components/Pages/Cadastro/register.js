@@ -252,7 +252,7 @@ function Cadastro(props) {
           </div>
         ) : (
           <div className={classes.btnsContainer}>
-            <ButtonFunc btnColor="BtnGreen" function={cadastrarHandler}>
+            <ButtonFunc btnColor={props.btnColor} function={cadastrarHandler}>
               {props.children}
             </ButtonFunc>
           </div>

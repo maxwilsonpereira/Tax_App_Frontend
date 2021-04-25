@@ -28,6 +28,14 @@
   /* color: #e8ba3c; */
   /* text-shadow: 1px 1px rgba(0, 0, 0, 0.72); */
 }
+.BlueBackBtn {
+  background-color: #0155a0 !important;
+  border: 2px solid #0155a0;
+}
+.GreenBackBtn {
+  background-color: #1e8658 !important;
+  border: #1e8658 !important;
+}
 .BlueBtn {
   /* background-color: #0155a0; */
   color: #0155a0;

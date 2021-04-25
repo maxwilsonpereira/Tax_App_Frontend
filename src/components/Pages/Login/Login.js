@@ -76,7 +76,7 @@ function FaleConosco(props) {
           </div>
         ) : (
           <>
-            <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
+            <ButtonFunc btnColor={props.btnColor} function={loginHandler}>
               Entrar
             </ButtonFunc>
           </>

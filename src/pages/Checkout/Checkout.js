@@ -199,7 +199,11 @@ function Sobre(props) {
       setLogInComponent(
         // userLoggedInHandler will be executed ONLY IF user
         // successfully log in:
-        <Login function={userLoggedInHandler} showTitle="noTitle" />
+        <Login
+          function={userLoggedInHandler}
+          showTitle="noTitle"
+          btnColor="BlueBackBtn"
+        />
       );
     } else {
       setLogInComponent(null);
@@ -215,7 +219,11 @@ function Sobre(props) {
     setLogInComponent(null);
     // TOGGLE CADASTRO:
     if (cadastroComponent === null) {
-      setCadastroComponent(<Register showTitle="noTitle">Cadastrar</Register>);
+      setCadastroComponent(
+        <Register showTitle="noTitle" btnColor="GreenBackBtn">
+          Cadastrar
+        </Register>
+      );
     } else {
       setCadastroComponent(null);
     }

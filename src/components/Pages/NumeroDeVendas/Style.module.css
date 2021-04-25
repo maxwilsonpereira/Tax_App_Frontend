@@ -24,3 +24,13 @@
 .CenterAligned {
   text-align: center;
 }
+
+/* ***** MOBILE ***** */
+@media (max-width: 700px) {
+  .Numbers h1 {
+    font-size: 4em;
+  }
+  .Numbers h3 {
+    font-size: 1.6em;
+  }
+}
