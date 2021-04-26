@@ -25,6 +25,8 @@ function Sobre(props) {
   const [btnFinalizarCompra, setBtnFinalizarCompra] = useState(null);
   const [patBoletoBancario, setPayBoletoBancario] = useState(false);
   const [avisoLogIn, setAvisoLogIn] = useState(null);
+  const [btnLoginHide, setBtnLoginHide] = useState(false);
+  const [btnCadastroHide, setBtnCadastroHide] = useState(false);
 
   const [productId, setProductId] = useState(0);
 
@@ -128,7 +130,7 @@ function Sobre(props) {
     } else {
       setAvisoLogIn(
         <h2 className={classes.AvisoParaLogar}>
-          Favor Fazer o Login ou Cadastrar-se no Sistema
+          Favor fazer o login ou cadastrar-se no sistema
           <br /> <br />
         </h2>
       );
@@ -164,17 +166,27 @@ function Sobre(props) {
           <br className={classes.MobileOnly} />
           <br className={classes.MobileOnly} />
           <div className={classes.CenterAligned}>
-            <h2>Já é cadastrado?</h2> <br />
-            <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
-              Log In
-            </ButtonFunc>
+            <h2>Já é cadastrado?</h2>
+            {!btnLoginHide && (
+              <>
+                <br />
+                <ButtonFunc btnColor="BlueBtn" function={loginHandler}>
+                  Log In
+                </ButtonFunc>
+              </>
+            )}
             <br />
             {logInComponent}
             <br />
-            <h2>Não tem cadastro?</h2> <br />
-            <ButtonFunc btnColor="BtnGreen" function={cadastroNovoHandler}>
-              Cadastro
-            </ButtonFunc>
+            <h2>Não tem cadastro?</h2>
+            {!btnCadastroHide && (
+              <>
+                <br />
+                <ButtonFunc btnColor="BtnGreen" function={cadastroNovoHandler}>
+                  Cadastro
+                </ButtonFunc>
+              </>
+            )}
             <br />
             {cadastroComponent}
             {/* <br /> */}
@@ -194,6 +206,8 @@ function Sobre(props) {
 
   function loginHandler(e) {
     e.preventDefault();
+    setBtnCadastroHide(false);
+    setBtnLoginHide(true);
     props.onEraseAllMessages();
     setCadastroComponent(null);
     // TOGGLE LOG IN:
@@ -217,6 +231,8 @@ function Sobre(props) {
   }
   function cadastroNovoHandler(e) {
     e.preventDefault();
+    setBtnCadastroHide(true);
+    setBtnLoginHide(false);
     props.onEraseAllMessages();
     setLogInComponent(null);
     // TOGGLE CADASTRO:
