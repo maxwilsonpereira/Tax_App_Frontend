@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-
-import classes from './Style.module.css';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../store/actions/actionsIndex';
+import classes from './styles.module.scss';
 import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 
 // SENDING EMAILS
@@ -11,7 +12,7 @@ import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 // import { MdEmail } from 'react-icons/md';
 // import { MdCall } from 'react-icons/md';
 
-export default function Contato(props) {
+function Contato(props) {
   const [number, setNumber] = useState('Número do Cartão');
   const [nomeTitular, setNomeTitular] = useState('Nome do Titular');
   const [codigoSeguranca, setCodigoSeguranca] = useState('Código de Segurança');
@@ -36,7 +37,7 @@ export default function Contato(props) {
 
   function finalizarCompraHandler(e) {
     e.preventDefault();
-    alert('Confirmar!');
+    props.onSetMessageLogin('Not implemented on development version.');
   }
 
   function enterKeyPressedHandler(event) {
@@ -110,6 +111,7 @@ export default function Contato(props) {
                 Confirmar
               </ButtonFunc>
             </div>
+            <div className={classes.messageToUser}>{props.messageLogin}</div>
           </div>
         </div>
       </div>
@@ -117,3 +119,16 @@ export default function Contato(props) {
     </section>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    messageLogin: state.login.messageLogin,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSetMessageLogin: (message) =>
+      dispatch(actionTypes.setMessageLogin(message)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Contato);

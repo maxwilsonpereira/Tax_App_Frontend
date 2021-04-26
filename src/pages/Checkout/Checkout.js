@@ -119,6 +119,7 @@ function Sobre(props) {
             {cartaoCreditoComponent}
             <br />
             {btnFinalizarCompra}
+            <div className={classes.messageToUser}>{props.messageCadastro}</div>
             <br />
             <br />
           </div>
@@ -188,6 +189,7 @@ function Sobre(props) {
     selectorCartaoColor,
     productId,
     props.userIsLogged,
+    props.messageCadastro,
   ]);
 
   function loginHandler(e) {
@@ -256,7 +258,7 @@ function Sobre(props) {
   }
   function finalizarCompraHandler(e) {
     e.preventDefault(e);
-    alert('Confirmar');
+    props.onSetMessageCadastro('Not implemented on development version.');
   }
 
   return (
@@ -284,6 +286,7 @@ function Sobre(props) {
 const mapStateToProps = (state) => {
   return {
     userIsLogged: state.login.isLogged,
+    messageCadastro: state.login.messageCadastro,
   };
 };
 
@@ -292,6 +295,8 @@ const mapDispatchToProps = (dispatch) => {
     onLogIn: (email) => dispatch(actionTypes.login(email)),
     onEraseAllMessages: (email) => dispatch(actionTypes.eraseAllMessages()),
     onHideSideDrawer: () => dispatch(actionTypes.hideSideDrawer()),
+    onSetMessageCadastro: (message) =>
+      dispatch(actionTypes.setMessageCadastro(message)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Sobre);

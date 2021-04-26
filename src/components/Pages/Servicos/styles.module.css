@@ -50,6 +50,10 @@
 }
 /* ***** MOBILE ***** */
 @media (max-width: 700px) {
+  .FlexboxComprar {
+    width: 100%;
+    padding: 10px;
+  }
   .FlexboxComprar > div {
     width: 100%;
   }

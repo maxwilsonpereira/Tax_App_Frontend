@@ -68,7 +68,6 @@ function FaleConosco(props) {
         name={senha}
       />
       <br />
-      <br />
       <div className={classes.SubmitBtn}>
         {isLoading ? (
           <div className={classes.progressCircle}>

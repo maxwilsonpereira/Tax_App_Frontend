@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionsIndex';
 import classes from './styles.module.scss';
 import ButtonFunc from '../../UI/Buttons/ButtonFunc';
 

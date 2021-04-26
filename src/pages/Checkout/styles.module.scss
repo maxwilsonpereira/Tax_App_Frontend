@@ -1,3 +1,6 @@
+// MIXINS:
+@import '../../styles/mixins.module.scss';
+
 .colorsWebSite {
   color: #8f2c31;
   color: #0155a0; /* hover */
@@ -58,6 +61,9 @@
   text-align: left;
   margin-bottom: 5px;
   font-size: 1.3em;
+}
+.messageToUser {
+  @include errorMessage;
 }
 .AvisoParaLogar {
   padding: 0 15px 0 15px;

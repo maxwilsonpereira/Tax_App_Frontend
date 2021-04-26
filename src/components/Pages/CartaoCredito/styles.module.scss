@@ -1,3 +1,6 @@
+// MIXINS:
+@import '../../../styles/mixins.module.scss';
+
 .AppContainer {
   max-width: 1000px;
   margin-left: auto;
@@ -43,7 +46,7 @@
   transform: translateY(25%);
 }
 .SubmitBtn {
-  /* text-align: right; */
+  text-align: right;
 }
 .Flexbox input,
 textarea {
@@ -78,4 +81,8 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .Flexbox input:valid {
   background-color: rgb(232, 240, 254) !important;
+}
+.messageToUser {
+  @include errorMessage;
+  text-align: left !important;
 }

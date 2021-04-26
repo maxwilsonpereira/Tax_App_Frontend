@@ -107,9 +107,8 @@ function Login(props) {
                   {props.messageAreaCliente}
                 </div>
                 {alterarSenhaShow}
-                <br />
               </div>
-              <div>
+              <>
                 {alterarInfosToggle ? (
                   <>
                     <Register
@@ -129,7 +128,7 @@ function Login(props) {
                     Alterar Informações
                   </UserData>
                 )}
-              </div>
+              </>
             </div>
           </div>
         </>
